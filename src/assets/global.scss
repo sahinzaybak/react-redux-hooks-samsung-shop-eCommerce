@@ -183,8 +183,21 @@ span.ant-radio + * {
 .ant-collapse-icon-position-right > .ant-collapse-item > .ant-collapse-header .ant-collapse-arrow {
   right: 16px;
   left: auto;
-  color: #1990ff;
+  color: #3e3e3e;
   opacity: 0.8;
   font-size: 10px;
   top:8px;
+}
+
+.ant-tooltip-inner{
+  min-width: auto;
+  min-height: auto;
+  padding: 4px 9px;
+  font-size: 12px;
+  border-radius: 50px;
+}
+
+.spinner-border{
+  border: 0.15em solid currentColor;
+  border-right-color: transparent;
 }
