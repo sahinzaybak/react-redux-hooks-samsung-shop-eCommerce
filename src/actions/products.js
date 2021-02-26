@@ -10,3 +10,14 @@ export function getProductList() {
     });
   };
 }
+
+export function getProductDetail(slug) {
+  return async dispatch => {
+    await axios.get(`${BASE_URL}/Product-detail?slug=${slug}`).then(value => {
+      dispatch({
+        type: "FETCH_PRODUCT_DETAIL",
+        payload: value.data[0],
+      });
+    });
+  };
+}

@@ -1,5 +1,6 @@
 const initialState = {
-  productList:[]
+  productList:[],
+  productDetail:[]
 }
 
 export default (state = initialState, action) => {
@@ -8,6 +9,11 @@ export default (state = initialState, action) => {
       return{
         ...state,
         productList: action.payload
+      }
+    case "FETCH_PRODUCT_DETAIL":
+      return{
+        ...state,
+        productDetail: action.payload
       }
     default:
       return state;
