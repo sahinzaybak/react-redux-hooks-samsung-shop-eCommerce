@@ -5,6 +5,7 @@ import productDetail from './pages/productDetail.jsx'
 import 'bootstrap/dist/css/bootstrap.css'
 import './assets/global.scss'
 import './assets/scss/products-page.scss'
+import './assets/scss/product-detail.scss'
 
 function App() {
   return (

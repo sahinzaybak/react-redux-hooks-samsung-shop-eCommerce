@@ -15,7 +15,7 @@ class productDetail extends PureComponent {
 
   render() {
     return (
-      <div className="products-page">
+      <div className="product-detail">
         <ProductInfo productInfo={this.props.productDetail} />
       </div>
     );

@@ -4,7 +4,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case "FETCH_PRODUCT_CHOOSEN_INFO":
+    case "FETCH_PRODUCT_SELECTED_INFO":
       return{
         ...state,
         productStorageInfo:action.payload

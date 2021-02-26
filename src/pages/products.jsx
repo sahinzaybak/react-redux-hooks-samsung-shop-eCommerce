@@ -30,7 +30,7 @@ class products extends PureComponent {
           <div className="col-md-9">
             <div className="products-page__list mt-4">
               <div className="row">
-                {this.props.Products.map((productInfo)=> (
+                {this.props.Products.map((productInfo) => (
                   <ProductList product={productInfo} key={productInfo.id}/>
                 ))}
               </div>

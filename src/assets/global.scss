@@ -201,3 +201,33 @@ span.ant-radio + * {
   border: 0.15em solid currentColor;
   border-right-color: transparent;
 }
+
+.image-gallery-icon{
+  filter: none;
+}
+
+.image-gallery-right-nav .image-gallery-svg,
+.image-gallery-left-nav .image-gallery-svg {
+  height: 55px;
+  width: 35px;
+  color: #007bff
+}
+
+.image-gallery-content .image-gallery-slide .image-gallery-image {
+  max-height: calc(100vh - 300px);
+}
+.image-gallery-thumbnail {
+  display: inline-block;
+  border: 1px solid transparent;
+  transition: border .3s ease-out;
+  width: 60px;
+  padding: 6px;
+  border-radius: 6px;
+  margin-right: 15px;
+  img{
+    border-radius: 6px;
+  }
+  &.active,&:hover,&:focus{
+    border: 1px solid #096dd9;
+  }
+}

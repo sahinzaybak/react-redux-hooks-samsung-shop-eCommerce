@@ -48,7 +48,7 @@ const ProductList = ({ product, holdChoosenProductInfo }) => {
         <h2 className="products-page__phone mt-4">{product.name}</h2>
         <div className="products-page__middle">
           <h2 className={`products-page__price mt-3 mb-2 ${isSpinner ? "d-none" : ""}`} >{product.memory[memoryId].price} TL</h2>
-          <div className={`spinner mt-2 ${!isSpinner ? "d-none" : ""}`} >
+          <div className={`spinner mt-1 ${!isSpinner ? "d-none" : ""}`} >
             <div className="spinner-border text-primary" role="status"></div>
           </div>
         </div>
