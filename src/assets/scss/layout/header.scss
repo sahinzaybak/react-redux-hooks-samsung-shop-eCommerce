@@ -8,8 +8,10 @@
     align-items: center;
     justify-content: flex-end;
     background-color: white;
+    cursor: pointer;
     &:hover{
       .header-basket__products{
+        pointer-events:all;
         opacity: 1;
       }
     }
@@ -81,7 +83,7 @@
       }
       &:hover{
         pointer-events: all;
-        opacity: 0;
+        opacity: 1;
       }
     }
   }

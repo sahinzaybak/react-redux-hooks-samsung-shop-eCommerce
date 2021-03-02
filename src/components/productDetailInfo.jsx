@@ -38,7 +38,7 @@ const ProductDetailInfo = ({productInfo, productStorage}) => {
 
   return (
     <div>
-      <DetailHeader name={productInfo.name} price={selectedMemory.price} selectedColor={selectedColor} selectedMemory={selectedMemory}  />
+      <DetailHeader name={productInfo.name} id={productInfo.id} price={selectedMemory.price} selectedColor={selectedColor} selectedMemory={selectedMemory}  />
       <div className="row h-100">
         <div className="col-md-6">
           <div className="product-detail__slider h-100">

@@ -10,6 +10,15 @@ const DetailHeader = (product) => {
     localStorage.setItem("basket", JSON.stringify(product.basketList));
 
   const basket = JSON.parse(localStorage.getItem("basket"));
+  let sameProduct = []
+  let matchProducts;
+  basket.forEach(element => {
+    sameProduct.push({name : element.productName, color: element.color.name})
+    matchProducts = sameProduct.filter( x => x.name == element.productName  && x.color == element.color.name) //Sepetteki aynı ürünler
+  });
+ 
+  console.log(matchProducts)
+
 
   return (
     <div className="header d-flex">
@@ -28,6 +37,7 @@ const DetailHeader = (product) => {
             <div className="header-basket__products">
               <p className="ml-3 mb-2 mt-1">Sepetim ({basket.length})</p>
               {basket != null && basket.map((basket) => ( 
+
                 <div className="d-flex header-basket__products-wrp" key={basket.id}>
                   <div className="d-flex align-items-start">
                     <img src={basket.color.image} alt=""/>
@@ -41,6 +51,7 @@ const DetailHeader = (product) => {
                   </div>
                 </div>
               ))}
+
               <div className="d-flex justify-content-around">
                 <a className="button pr-4 pl-4 p-1 small white">Sepeti Gör</a>
                 <a className="button pr-4 pl-4 p-1 small green">Siparişi Tamamla</a>
