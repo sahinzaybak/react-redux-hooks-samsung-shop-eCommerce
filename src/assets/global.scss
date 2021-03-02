@@ -158,6 +158,19 @@ label {
     color:white;
     background-color: #183587;
   }
+  &.small{
+    font-size: 14px;
+    font-weight: 500;
+  }
+  &.green{
+    background-color: #7fca1c;
+    border: 1px solid #85c72c;
+  }
+  &.white{
+    background-color: #f7f7f7;
+    border: 1px solid #ece8e8;
+    color: black;
+  }
 }
 
 [data-theme='compact'] .site-collapse-custom-collapse .site-collapse-custom-panel,

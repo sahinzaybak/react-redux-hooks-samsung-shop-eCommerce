@@ -1,12 +1,13 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { connect } from "react-redux";
 
-const DetailHeader = product => {
-  function addBasket(){
-    console.log(product.selectedColor)
-    console.log(product.selectedMemory)
-  }
+//Actions
+import {basket} from '../../actions/basket'
 
+const DetailHeader = (product, addBasket) => {
+  function addBasket(){
+     product.basket(product.selectedColor, product.selectedMemory, product.name)
+  }
   return (
     <div className="product-detail__header sticky-top">
     <h3>{product.name}</h3>
@@ -23,10 +24,13 @@ const DetailHeader = product => {
 
 const mapStateToProps = (state) => {
   return{
-    loading: state.products.isLoading
+    loading: state.products.isLoading,
   }
 };
 
+const mapDispatchToProps = {
+  basket
+};
 
-export default connect(mapStateToProps)(DetailHeader);
+export default connect(mapStateToProps,mapDispatchToProps)(DetailHeader);
 //rscp

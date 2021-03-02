@@ -19,7 +19,7 @@ const DetailSim = product => {
             <div className={`product-detail__color-item mb-3 p-2 pb-3 
             ${product.productInfo.sim[selectedSim].id == productSim.id ? "active" : ""}`} key={productSim.id} onClick={() => {
               setSpinnerSim(true)
-              setTimeout(() => {setSelectedSim(productSim.id)}, 700);
+              setTimeout(() => {setSelectedSim(productSim.id)}, 0);
               setTimeout(() => {setSpinnerSim(false)}, 700);
             }}>
               <p className="product-detail__color-other">{productSim.name} SIM</p>
