@@ -247,13 +247,15 @@ span.ant-radio + * {
 
 
 .notification__item--success {
-  background-color: #55bf6d  !important;
-  border-left: 8px solid #4ea262  !important;
+  background-color: #7fca1c !important;
+  border-left: 8px solid #85c72c !important;
 }
 
 .notification__message {
-  font-size: 16px !important;
-  padding: 6px;
+  font-size: 14px !important;
+  padding: 3px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.4px;
 }
 
 .basket-add-text{
@@ -270,7 +272,7 @@ span.ant-radio + * {
 }
 
 .basket-add-success{
-  transition: all  0.6s .4s ease-in-out;
+  transition: all  0.6s .3s ease-in-out;
   position: absolute;
   transform: translateY(60px);
   opacity: 0;
@@ -316,3 +318,22 @@ span.ant-radio + * {
   }
 }
 
+.ant-btn{
+ 
+
+  border-radius: 50px;
+  
+  font-weight: 500;
+
+}
+.ant-modal-content {
+  border-radius: 12px;
+}
+.ant-modal-confirm-body .ant-modal-confirm-title {
+  color: #353535;
+  letter-spacing: -0.7px;
+}
+
+.ant-modal-confirm .ant-modal-confirm-btns {
+  margin-top: 0px;
+}

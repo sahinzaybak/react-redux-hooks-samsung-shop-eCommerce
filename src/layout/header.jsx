@@ -1,24 +1,55 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import { connect } from "react-redux";
+import { store } from 'react-notifications-component';
+import { Modal } from 'antd';
+import { ExclamationCircleOutlined, DeleteOutlined } from '@ant-design/icons';
 
 import "../assets/scss/layout/header.scss";
 import headerImage from "../assets/images/header.png";
 import basketImg from "../assets/images/shopping-cart.svg";
 
-const DetailHeader = (product) => {
+//Actions
+import {basketItemDelete} from '../actions/basket'
+const { confirm } = Modal;
+const header = (product) => {
   if(product.basketList.length != 0)
     localStorage.setItem("basket", JSON.stringify(product.basketList));
 
-  const basket = JSON.parse(localStorage.getItem("basket"));
-  let sameProduct = []
-  let matchProducts;
-  basket.forEach(element => {
-    sameProduct.push({name : element.productName, color: element.color.name})
-    matchProducts = sameProduct.filter( x => x.name == element.productName  && x.color == element.color.name) //Sepetteki aynı ürünler
-  });
- 
-  console.log(matchProducts)
+  let basket = JSON.parse(localStorage.getItem("basket"));
 
+  function deleteItem(basketProductId){
+    confirm({
+      title: 'Ürünü sepetten çıkarmak istediğinize emin misiniz?',
+      icon: <ExclamationCircleOutlined />,
+      okText: 'Evet',
+      okType: 'danger',
+      cancelText: 'Hayır',
+      confirmLoading:true,
+      onOk() {
+          return new Promise((resolve, reject) => {
+            setTimeout(Math.random() > 1000 ? resolve  : reject, 1000);
+            setTimeout(() => {
+              product.basketItemDelete(basketProductId)
+              if(product.basketList.length == 1) localStorage.clear();
+              store.addNotification({
+                message: "Ürün sepetten çıkarıldı",
+                type: "success",
+                insert: "top",
+                width:250,
+                showIcon:true,
+                container: "top-right",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                dismiss: {
+                  duration: 2000,
+                  onScreen: false
+                },
+              })
+            }, 1000);
+          }).catch(() =>false);
+      },
+    });
+  }
 
   return (
     <div className="header d-flex">
@@ -36,9 +67,9 @@ const DetailHeader = (product) => {
         {basket != null && 
             <div className="header-basket__products">
               <p className="ml-3 mb-2 mt-1">Sepetim ({basket.length})</p>
-              {basket != null && basket.map((basket) => ( 
-
+              {basket != null && basket.map((basket,index) => ( 
                 <div className="d-flex header-basket__products-wrp" key={basket.id}>
+               
                   <div className="d-flex align-items-start">
                     <img src={basket.color.image} alt=""/>
                   </div>
@@ -49,9 +80,11 @@ const DetailHeader = (product) => {
                     <p className="header-basket__products-item">SIM: Tek Sim</p>
                     <p className="header-basket__products-price mt-1">{basket.memory.price} TL</p>
                   </div>
+                  <div className="ml-auto mr-2">
+                    <p onClick={() => {deleteItem(index)}}><DeleteOutlined /></p>
+                  </div>
                 </div>
               ))}
-
               <div className="d-flex justify-content-around">
                 <a className="button pr-4 pl-4 p-1 small white">Sepeti Gör</a>
                 <a className="button pr-4 pl-4 p-1 small green">Siparişi Tamamla</a>
@@ -69,5 +102,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(DetailHeader);
+const mapDispatchToProps = {
+  basketItemDelete
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(header);
 //rscp

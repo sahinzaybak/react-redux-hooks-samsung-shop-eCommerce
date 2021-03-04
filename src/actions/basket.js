@@ -11,3 +11,14 @@ export function basket(selectedColor, selectedMemory, productName, productId) {
     });
   };
 }
+
+
+export function basketItemDelete(productIndex) {
+  return async dispatch => {
+    dispatch({
+      type: "FETCH_BASKET_ITEM_DELETE",
+      payload: productIndex
+    });
+  };
+}
+

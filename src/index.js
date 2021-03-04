@@ -27,15 +27,13 @@ const store = createStore(
 // - Ayrıca oluşturmuş olduğumuz store un her yere ulaşabilmesi için Provider yapısına store ekliyoruz.
 
 // + Router yapısı: Tüm projenin router'ı görebilmesi için bu kısımda provider üzerinde sarmaladık.
-let basket;
-if(JSON.parse(localStorage.getItem("basket") != null)) 
-   basket = JSON.parse(localStorage.getItem("basket"));
+
 
 ReactDOM.render(
     <BrowserRouter> 
       <Provider store={store}> 
         <ReactNotification />
-        <Header basket={basket} />
+        <Header />
         <App />
       </Provider>
     </BrowserRouter>,

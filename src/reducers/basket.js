@@ -16,7 +16,14 @@ export default (state = initialState, action) => {
           basketList: [...JSON.parse(localStorage.getItem("basket")), action.payload] //concat
         }
       }
-     
+    case "FETCH_BASKET_ITEM_DELETE":
+        const newBasketList = [...state.basketList] //immutable
+        newBasketList.splice(action.payload, 1);
+        debugger;
+        return{
+          ...state,
+          basketList: newBasketList 
+      }
     default:
       return state;
   }

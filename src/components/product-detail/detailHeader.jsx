@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { connect } from "react-redux";
-import { store } from 'react-notifications-component';
+
 
 //Actions
 import {basket} from '../../actions/basket'
@@ -13,8 +13,8 @@ const DetailHeader = (product, addBasket) => {
     setTimeout(() => {  
        product.basket(product.selectedColor, product.selectedMemory, product.name, product.id); //sepete ekle
        setBasketSuccess(true)
-    },2000);
-    setTimeout(() => {setBasketSuccess(false); setBasketLoading(false)}, 4500);
+    },1200);
+    setTimeout(() => {setBasketSuccess(false); setBasketLoading(false)}, 2500);
   }
   return (
     <div className="product-detail__header sticky-top">
