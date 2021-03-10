@@ -7,7 +7,7 @@ export default (state = initialState, action) => {
     case "FETCH_PRODUCT_SELECTED_INFO":
       return{
         ...state,
-        productStorageInfo:action.payload
+        productStorageInfo: action.payload
       }
     default:
       return state;

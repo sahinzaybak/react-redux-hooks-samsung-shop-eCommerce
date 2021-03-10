@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import {Link} from 'react-router-dom';
 import { store } from 'react-notifications-component';
 import { Modal } from 'antd';
 import { ExclamationCircleOutlined, DeleteOutlined } from '@ant-design/icons';
@@ -13,11 +14,12 @@ import {basketItemDelete} from '../actions/basket'
 const { confirm } = Modal;
 const header = (product) => {
   if(product.basketList.length != 0)
-    localStorage.setItem("basket", JSON.stringify(product.basketList));
+    localStorage.setItem("basket", JSON.stringify(product.basketList)); //state basketList yenilendiğinde localStorage'de yenilenir.
 
   let basket = JSON.parse(localStorage.getItem("basket"));
 
   function deleteItem(basketProductId){
+    if(product.basketList.length == 1) localStorage.clear();
     confirm({
       title: 'Ürünü sepetten çıkarmak istediğinize emin misiniz?',
       icon: <ExclamationCircleOutlined />,
@@ -26,27 +28,26 @@ const header = (product) => {
       cancelText: 'Hayır',
       confirmLoading:true,
       onOk() {
-          return new Promise((resolve, reject) => {
-            setTimeout(Math.random() > 1000 ? resolve  : reject, 1000);
-            setTimeout(() => {
-              product.basketItemDelete(basketProductId)
-              if(product.basketList.length == 1) localStorage.clear();
-              store.addNotification({
-                message: "Ürün sepetten çıkarıldı",
-                type: "success",
-                insert: "top",
-                width:250,
-                showIcon:true,
-                container: "top-right",
-                animationIn: ["animate__animated", "animate__fadeIn"],
-                animationOut: ["animate__animated", "animate__fadeOut"],
-                dismiss: {
-                  duration: 2000,
-                  onScreen: false
-                },
-              })
-            }, 1000);
-          }).catch(() =>false);
+        return new Promise((resolve, reject) => {
+          setTimeout(Math.random() > 1000 ? resolve  : reject, 1000);
+          setTimeout(() => {
+            product.basketItemDelete(basketProductId) //sepetten seçili ürünü sil.
+            store.addNotification({
+              message: "Ürün sepetten çıkarıldı",
+              type: "success",
+              insert: "top",
+              width:250,
+              showIcon:true,
+              container: "top-right",
+              animationIn: ["animate__animated", "animate__fadeIn"],
+              animationOut: ["animate__animated", "animate__fadeOut"],
+              dismiss: {
+                duration: 2000,
+                onScreen: false
+              },
+            })
+          }, 1000);
+        }).catch(() =>false);
       },
     });
   }
@@ -57,13 +58,13 @@ const header = (product) => {
         <img src={headerImage} alt="" />
       </div>
       <div className="header-basket">
-        <div className="header-basket__item">
+        <Link to="/basket/list" className="header-basket__item">
           <p className="header-basket__text">Sepetim</p>
           <img className="ml-2" src={basketImg} alt="" />
           {basket == null && (<span className="header-basket__count ml-1">0</span>)}
           {basket != null && (<span className="header-basket__count ml-1">{basket.length}</span>)}
-        </div>
-
+        </Link>
+     
         {basket != null && 
             <div className="header-basket__products">
               <p className="ml-3 mb-2 mt-1">Sepetim ({basket.length})</p>
@@ -79,6 +80,7 @@ const header = (product) => {
                     <p className="header-basket__products-item">Hafıza: {basket.memory.gb} GB</p>
                     <p className="header-basket__products-item">SIM: Tek Sim</p>
                     <p className="header-basket__products-price mt-1">{basket.memory.price} TL</p>
+                    <p className="header-basket__products-s mt-1">{basket.count} Adet</p>
                   </div>
                   <div className="ml-auto mr-2">
                     <p onClick={() => {deleteItem(index)}}><DeleteOutlined /></p>

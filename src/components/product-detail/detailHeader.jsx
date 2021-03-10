@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import { connect } from "react-redux";
 
-
 //Actions
 import {basket} from '../../actions/basket'
 
@@ -38,7 +37,6 @@ const DetailHeader = (product, addBasket) => {
   </div>
   );
 };
-
 const mapStateToProps = (state) => {
   return{
     loading: state.products.isLoading,
@@ -50,20 +48,3 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(DetailHeader);
-//rscp
-
-
-
-  // store.addNotification({
-    //   message: "Sepete Eklendi!",
-    //   type: "success",
-    //   insert: "top",
-    //   width:200,
-    //   container: "top-right",
-    //   animationIn: ["animate__animated", "animate__fadeIn"],
-    //   animationOut: ["animate__animated", "animate__fadeOut"],
-    //   dismiss: {
-    //     duration: 2000,
-    //     onScreen: false
-    //   },
-    // })
