@@ -1,12 +1,32 @@
 import React, { PureComponent } from 'react';
 import { connect } from "react-redux";
-
+import { Modal } from 'antd';
+import { ExclamationCircleOutlined, DeleteOutlined } from '@ant-design/icons';
 //Components
 import BasketList from '../components/basket-page/basketList'
 import BasketSummary from '../components/basket-page/basketSummary'
 import CouponCode from '../components/basket-page/couponCode'
-
+const { confirm } = Modal;
 class basket extends PureComponent {
+  orderComplete(){
+    const vm = this.props;
+    confirm({
+      title: 'Siparişi tamamlamak istediğinizden emin misiniz?',
+      icon: <ExclamationCircleOutlined />,
+      okText: 'Evet',
+      okType: 'success',
+      cancelText: 'Hayır',
+      confirmLoading:true,
+      onOk() {
+        return new Promise((resolve, reject) => {
+          setTimeout(Math.random() > 1000 ? resolve  : reject, 1000);
+          setTimeout(() => {
+            vm.history.push("/basket/payment")
+          }, 1000);
+        }).catch(() =>false);
+      },
+    });
+  }
   render() {
     return (
       <div className="basket-page">
@@ -26,7 +46,7 @@ class basket extends PureComponent {
               <div className="basket-summary coupon mt-3">
                 <CouponCode />
               </div>
-              <a className="button w-100 text-center mt-4 green" onClick={(e) => this.checkCode(e.target.value)}>Siparişi Onayla</a>
+              <a className="button w-100 text-center mt-4 green" onClick={this.orderComplete.bind(this)}>Siparişi Tamamla</a>
             </div>
           </div>
         </div>

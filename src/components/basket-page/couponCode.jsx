@@ -32,7 +32,7 @@ class CouponCode extends Component {
           insert: "top",
           width:250,
           showIcon:true,
-          container: "bottom-right",
+          container: "top-right",
           animationIn: ["animate__animated", "animate__fadeIn"],
           animationOut: ["animate__animated", "animate__fadeOut"],
           dismiss: {
@@ -49,7 +49,7 @@ class CouponCode extends Component {
         insert: "top",
         width:250,
         showIcon:true,
-        container: "bottom-right",
+        container: "top-right",
         animationIn: ["animate__animated", "animate__fadeIn"],
         animationOut: ["animate__animated", "animate__fadeOut"],
         dismiss: {

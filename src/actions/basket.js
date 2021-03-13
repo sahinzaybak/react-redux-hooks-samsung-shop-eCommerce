@@ -24,7 +24,6 @@ export function basketItemDelete(productIndex) {
 
 export function summaryLoading(bool) {
   return async dispatch => {
-    debugger;
     dispatch({
       type: "FETCH_SUMMARY_LOADING",
       payload: bool

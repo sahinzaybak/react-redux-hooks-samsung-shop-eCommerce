@@ -1,0 +1,34 @@
+.payment{
+  padding: 22px;
+	max-width: 77%;
+	margin: 0 auto;
+  .ant-input-number,.ant-select-selector{
+    width: 100%;
+    border-radius: 50px !important;
+  }
+  .ant-select-selector{
+    height: 35px !important;
+    display: flex;
+    align-items: center;
+  }
+  .ant-input-number-handler-wrap{
+    display: none;
+  }
+  input{
+    border-radius: 50px;
+    height: 35px;
+  }
+  .ant-form-item {
+    width: 47%;
+    flex-direction: column;
+  }
+  .ant-form-item-label{
+    text-align: left;
+  }
+  .ant-form-item-explain, .ant-form-item-extra{
+    font-size: 12px;
+  }
+  .button{
+    font-weight: 600;
+  }
+}
