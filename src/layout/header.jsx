@@ -30,7 +30,6 @@ const Header = (product) => {
       cancelText: 'Hayır',
       confirmLoading:true,
       onOk() {
-        
         return new Promise((resolve, reject) => {
           setTimeout(Math.random() > 1000 ? resolve  : reject, 1000);
           setTimeout(() => {
@@ -68,12 +67,16 @@ const Header = (product) => {
       </div>
       <div className="header-basket">
         <Link to="/basket/list" className="header-basket__item">
+          {/* <p className="header-basket__text">Önceki Siparişlerim({basket.length})</p> */}
+        </Link>
+        
+        <Link to="/basket/list" className="header-basket__item">
           <p className="header-basket__text">Sepetim</p>
           <img className="ml-2" src={basketImg} alt="" />
           {basket == null && (<span className="header-basket__count ml-1">0</span>)}
           {basket != null && (<span className="header-basket__count ml-1">{basket.length}</span>)}
         </Link>
-     
+    
         {basket != null && 
             <div className="header-basket__products">
               <p className="ml-3 mb-2 mt-1">Sepetim ({basket.length})</p>

@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import { Form, Input, InputNumber, Select, Table, Radio, Modal} from "antd";
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { connect } from "react-redux";
 
 //Components
@@ -10,9 +11,6 @@ const validateMessages = {
   types: {
     email: "Doğru format değil!",
     number: "Numara giriniz!",
-  },
-  number: {
-    range: "${label} must be between ${min} and ${max}",
   },
 };
 
@@ -34,56 +32,84 @@ const columns = [
   },
 ];
 
-
-let tableHirePriceTotal;
+let tableHirePriceTotal = null;
 let totalPrice;
-let today;
+let today = new Date()
+let date;
+const { confirm } = Modal;
 class payment extends PureComponent {
   state = {
     dataSource:[],
     choosePaymentmethod:'',
-    hire:''
+    hire:'',
+    tableShow:false
   }
 
-  selectHireCount = (count) => { //taksit seçeneği
-    today = new Date()
+  componentDidMount(){ //her zaman default 2 taksit
     totalPrice = localStorage.getItem('totalPrice')
     tableHirePriceTotal = [...this.state.dataSource];
+    for (let index = 1; index <= 2; index++) {
+      date = today.getDate() + '-' + "0" + (today.getMonth() + index +1) + '-' + today.getFullYear();
+      tableHirePriceTotal.push({key: '1', hire: index, date: date, price: (totalPrice / 2).toFixed(3) + " " + "TL"});
+    }
+  }
+
+  selectHireCount = (count) => { //taksit seçeneği (2,3,4)
+    tableHirePriceTotal = [...this.state.dataSource];
     for (let index = 1; index <= count; index++) {
-      const date = today.getDate() + '-' + "0" + (today.getMonth() + index +1) + '-' + today.getFullYear();
+      date = today.getDate() + '-' + "0" + (today.getMonth() + index +1) + '-' + today.getFullYear();
       tableHirePriceTotal.push({key: '1', hire: index, date: date, price: (totalPrice / count).toFixed(3) + " " + "TL"});
       this.setState({ tableHirePriceTotal });
     }
   }
 
-  changePaymentMethod = (e) => { //ödeme seçeneği
+  changePaymentMethod = (e) => { //ödeme şekli (taksit, peşin)
     this.setState({choosePaymentmethod : e.target.value})
-    if(e.target.value == "cash")
-      tableHirePriceTotal = null
+    if(e.target.value == "cash"){
+      this.setState({tableShow:false})
+    }
+   
+    else
+      this.setState({tableShow:true})
   };
 
   completePayment = () => { // Ödemeyi Tamamla
-    const vm = this.props;
+    const vm = this;
     const todayDate = today.getDate() + '-' + "0" + (today.getMonth() +1) + '-' + today.getFullYear();
-    localStorage.setItem("myPreviousOrder", JSON.stringify( //Siparişi localStorage kaydet.
-      [...this.props.basketList.concat({
-        orderDate: todayDate, 
-        orderPrice: tableHirePriceTotal == null ? totalPrice : tableHirePriceTotal
-      })]
-    )); 
-
-    Modal.success({
+    confirm({
+      title: 'Ödeme yapmak istediğinizden emin misiniz?',
+      icon: <ExclamationCircleOutlined />,
+      okText: 'Evet',
       centered:true,
-      title: 'Ödemeniz Başarılı!',
-      okText: 'Anladım',
       okType: 'success',
-      content: tableHirePriceTotal == null ? 
-      `${totalPrice} TL ödemeniz başarıyla yapıldı. Teşekkür ederiz!` : 
-      `${tableHirePriceTotal[0].price}'lik ilk taksidinizi ${tableHirePriceTotal[0].date} tarihine kadar ödeyebilirsiniz. Teşekkür ederiz!`,
+      cancelText: 'Hayır',
+      confirmLoading:true,
       onOk() {
-        // vm.history.push("/")
+        return new Promise((resolve, reject) => {
+          setTimeout(Math.random() > 1000 ? resolve  : reject, 1000);
+          setTimeout(() => {
+            localStorage.setItem("myPreviousOrder", JSON.stringify( //Siparişi localStorage kaydet.
+              [...vm.props.basketList.concat({
+                orderDate: todayDate, 
+                orderPrice: vm.state.tableShow == false ? totalPrice : tableHirePriceTotal
+              })]
+            )); 
+            Modal.success({
+              centered:true,
+              title: 'Ödemeniz Başarılı!',
+              okText: 'Anladım',
+              okType: 'success',
+              content: vm.state.tableShow == false ? 
+              `${totalPrice} TL ödemeniz başarıyla yapıldı. Teşekkür ederiz!` : 
+              `${tableHirePriceTotal[0].price}'lik ilk taksidinizi ${tableHirePriceTotal[0].date} tarihine kadar ödeyebilirsiniz. Teşekkür ederiz!`,
+              onOk() {
+                // vm.history.push("/")
+              },
+            });
+          }, 1000);
+        }).catch(() =>false);
       },
-    });
+    });  
   };
   
   componentWillMount(){
@@ -91,16 +117,17 @@ class payment extends PureComponent {
   }
   componentWillUnmount(){ 
     document.body.classList.remove("hide-basket");
-    tableHirePriceTotal = ""
+    tableHirePriceTotal = null
   }
 
   render() {
     return (
       <div className="payment basket-page">
          <h4 class="basket-title">Ödeme Yap</h4>
+         <Form name="nest-messages" validateMessages={validateMessages} onFinish={this.completePayment.bind(this)}>
          <div className="row">
            <div className="col-md-8">
-            <Form name="nest-messages" validateMessages={validateMessages} onFinish={this.completePayment.bind(this)}>
+         
             <div className="d-flex justify-content-between">
               <Form.Item name="name" label="Ad-Soyad" rules={[{required: true}]}>
                 <Input placeholder="Ad-Soyad" />
@@ -140,8 +167,8 @@ class payment extends PureComponent {
             </div>
 
             {this.state.choosePaymentmethod == "hire" &&
-              <Form.Item className="w-100" name="hire" label="Taksit" rules={[{required: true}]}>
-                <Select value={this.state.hire} name="hire" placeholder="Kaç Taksit Ödeme İstiyorsunuz?" allowClear 
+              <Form.Item className="w-100" name="hire" label="Taksit">
+                <Select value={this.state.hire} defaultValue="2" name="hire" placeholder="Kaç Taksit Yapmak İstiyorsunuz?" allowClear 
                 onChange={value => this.selectHireCount(value)}>
                   <Option value="2">2 Taksit</Option>
                   <Option value="3">3 Taksit</Option>
@@ -149,22 +176,20 @@ class payment extends PureComponent {
                 </Select>
               </Form.Item>
             }
-            {tableHirePriceTotal != null &&
+            {this.state.tableShow &&
               <Table dataSource={tableHirePriceTotal} columns={columns} />
             }
-            <div className="d-flex justify-content-end">
-              <button className="button green mt-3" onClick={this.success}>Ödemeyi Tamamla</button>
-            </div>
-           </Form>  
           </div>
 
            <div className="col-md-4">
             <div className="basket-summary">
-                <h5 className="basket-title mb-3">Sipariş Özeti</h5>
-                <BasketSummary basket={this.props.basketList}/>
-              </div>
+              <h5 className="basket-title mb-3">Sipariş Özeti</h5>
+              <BasketSummary basket={this.props.basketList}/>
+            </div>
+            <button className="button green mt-3 w-100" onClick={this.success}>Ödemeyi Tamamla</button>
            </div>
          </div>
+         </Form>  
       </div>
     );
   }
