@@ -1,5 +1,5 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
+import { connect} from "react-redux";
 import {Link} from 'react-router-dom';
 import { store } from 'react-notifications-component';
 import { Modal } from 'antd';
@@ -11,10 +11,12 @@ import basketImg from "../assets/images/shopping-cart.svg";
 
 //Actions
 import {basketItemDelete} from '../actions/basket'
+import {basketStorage} from '../actions/basket'
 const { confirm } = Modal;
-const header = (product) => {
+const Header = (product) => {
   if(product.basketList.length != 0)
-    localStorage.setItem("basket", JSON.stringify(product.basketList)); //state basketList yenilendiğinde localStorage'de yenilenir.
+    localStorage.setItem("basket", JSON.stringify(product.basketList)); //state basketList yenilendiğinde localStorage'de yenilenir
+  
 
   let basket = JSON.parse(localStorage.getItem("basket"));
 
@@ -28,6 +30,7 @@ const header = (product) => {
       cancelText: 'Hayır',
       confirmLoading:true,
       onOk() {
+        
         return new Promise((resolve, reject) => {
           setTimeout(Math.random() > 1000 ? resolve  : reject, 1000);
           setTimeout(() => {
@@ -51,6 +54,12 @@ const header = (product) => {
       },
     });
   }
+
+  useEffect(() => { //sayfa yenilendiğinde local storage'deki basket listesini state'te ki basketList'e doldur.
+    if(basket != null)
+      product.basketStorage();
+  },[]);
+
 
   return (
     <div className="header d-flex">
@@ -105,8 +114,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  basketItemDelete
+  basketItemDelete,
+  basketStorage
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(header);
+export default connect(mapStateToProps,mapDispatchToProps)(Header);
 //rscp

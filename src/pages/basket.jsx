@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from "react-redux";
 import { Modal } from 'antd';
-import { ExclamationCircleOutlined, DeleteOutlined } from '@ant-design/icons';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 //Components
 import BasketList from '../components/basket-page/basketList'
 import BasketSummary from '../components/basket-page/basketSummary'

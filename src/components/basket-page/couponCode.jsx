@@ -22,6 +22,7 @@ class CouponCode extends Component {
     isCode = this.props.codeList.some(x=> x.code == this.state.couponCode)
     if(isCode){
       this.props.checkCouponCode(true)
+      localStorage.setItem('couponCode', true)
       this.props.summaryLoading(true) //Sipariş özeti loading
       setTimeout(() => {this.setState({isSpinner : false})}, 700);
       setTimeout(() => {
@@ -61,7 +62,7 @@ class CouponCode extends Component {
   }
   render(){
     return (
-      <div className={`${isCode ? "disabled" : ""}`}>
+      <div className={`${localStorage.getItem('couponCode') ? "disabled" : ""}`}>
         <h5 class="basket-title mb-3">Kupon Kodu</h5>
         <div className="d-flex justify-content-between">
           <input type="text" placeholder="Kupon Kodu Giriniz" name="couponCode" 
@@ -74,7 +75,6 @@ class CouponCode extends Component {
     );
   }
 };
-
 
 const mapStateToProps = (state) => {
   return{

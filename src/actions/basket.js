@@ -13,6 +13,15 @@ export function basket(selectedColor, selectedMemory, productName, productId) {
   };
 }
 
+export function basketStorage() {
+  return async dispatch => {
+    dispatch({
+      type: "FETCH_BASKET_STORAGE",
+      payload: JSON.parse(localStorage.getItem("basket"))
+    });
+  };
+}
+
 export function basketItemDelete(productIndex) {
   return async dispatch => {
     dispatch({

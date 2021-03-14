@@ -12,7 +12,6 @@ export function couponCodeList() {
 }
 
 export function checkCouponCode(bool) {
-  debugger;
   return async dispatch => {
     dispatch({
       type: "FETCH_CHECK_COUPON_CODE",

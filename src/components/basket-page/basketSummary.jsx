@@ -4,9 +4,11 @@ import { connect } from "react-redux";
 const BasketSummary = (basketList) => {
   const [cargoPrice, setCargoPrice] = useState(9) //Kargo ücreti
   const [totalPrice, setTotalPrice] = useState(0)
+  const [couponCode, isCouponCode] = useState(0)
 
   useEffect(() => { //componentDidUpdate () => her state değişiminde tetiklenir.
-    if(basketList.isCouponCode)
+    isCouponCode(localStorage.getItem('couponCode'))
+    if(couponCode)
       setTotalPrice(basketList.basket.reduce((a,v) =>  a = (a + v.memory.price) + 0,9 - (0.100), 0 ).toFixed(3))
 
     else
@@ -34,7 +36,7 @@ const BasketSummary = (basketList) => {
             <span>+{cargoPrice} TL </span>
           </div>
         </div>
-        <div className={`d-flex basket-summary__item ${!basketList.isCouponCode ? "disabled" : ""}`}>
+        <div className={`d-flex basket-summary__item ${!couponCode ? "disabled" : ""}`}>
           <p> İndirimsiz Sipariş Tutarı: </p>
           <div className="d-flex ml-2">
             <span className={`${basketList.isBasketLoading ? "d-none" : ""}`}>
@@ -45,13 +47,12 @@ const BasketSummary = (basketList) => {
             </div>
           </div>
         </div>
-        <div className={`d-flex basket-summary__item ${!basketList.isCouponCode ? "disabled" : ""}`}>
+        <div className={`d-flex basket-summary__item ${!couponCode  ? "disabled" : ""}`}>
           <p> Kupon Kodu İndirimi: </p>
           <div className="d-flex ml-2">
             <span>-100 TL</span>
           </div>
         </div>
-       
         <div className="d-flex basket-summary__item">
           <p> </p>
           <div className="d-flex ml-2">

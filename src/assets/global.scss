@@ -327,9 +327,20 @@ span.ant-radio + * {
 }
 .ant-modal-confirm-body .ant-modal-confirm-title {
   color: #353535;
-  letter-spacing: -0.7px;
+
 }
 
 .ant-modal-confirm .ant-modal-confirm-btns {
   margin-top: 0px;
+}
+
+.hide-basket{
+  .header-basket__item{
+    display: none;
+  }
+}
+
+.ant-btn-success{
+  border: 1px solid #85c72c;
+  color: #85c72c;
 }

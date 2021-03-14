@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Form, Input, InputNumber, Select, Table } from "antd";
+import { Form, Input, InputNumber, Select, Table, Radio, Modal} from "antd";
 import { connect } from "react-redux";
 
 //Components
@@ -15,7 +15,6 @@ const validateMessages = {
     range: "${label} must be between ${min} and ${max}",
   },
 };
-
 
 const columns = [
   {
@@ -35,14 +34,19 @@ const columns = [
   },
 ];
 
+
 let tableHirePriceTotal;
 let totalPrice;
+let today;
 class payment extends PureComponent {
   state = {
-    dataSource:[]
+    dataSource:[],
+    choosePaymentmethod:'',
+    hire:''
   }
+
   selectHireCount = (count) => { //taksit seçeneği
-    let today = new Date()
+    today = new Date()
     totalPrice = localStorage.getItem('totalPrice')
     tableHirePriceTotal = [...this.state.dataSource];
     for (let index = 1; index <= count; index++) {
@@ -51,28 +55,67 @@ class payment extends PureComponent {
       this.setState({ tableHirePriceTotal });
     }
   }
+
+  changePaymentMethod = (e) => { //ödeme seçeneği
+    this.setState({choosePaymentmethod : e.target.value})
+    if(e.target.value == "cash")
+      tableHirePriceTotal = null
+  };
+
+  completePayment = () => { // Ödemeyi Tamamla
+    const vm = this.props;
+    const todayDate = today.getDate() + '-' + "0" + (today.getMonth() +1) + '-' + today.getFullYear();
+    localStorage.setItem("myPreviousOrder", JSON.stringify( //Siparişi localStorage kaydet.
+      [...this.props.basketList.concat({
+        orderDate: todayDate, 
+        orderPrice: tableHirePriceTotal == null ? totalPrice : tableHirePriceTotal
+      })]
+    )); 
+
+    Modal.success({
+      centered:true,
+      title: 'Ödemeniz Başarılı!',
+      okText: 'Anladım',
+      okType: 'success',
+      content: tableHirePriceTotal == null ? 
+      `${totalPrice} TL ödemeniz başarıyla yapıldı. Teşekkür ederiz!` : 
+      `${tableHirePriceTotal[0].price}'lik ilk taksidinizi ${tableHirePriceTotal[0].date} tarihine kadar ödeyebilirsiniz. Teşekkür ederiz!`,
+      onOk() {
+        // vm.history.push("/")
+      },
+    });
+  };
+  
+  componentWillMount(){
+    document.body.classList.add("hide-basket");
+  }
+  componentWillUnmount(){ 
+    document.body.classList.remove("hide-basket");
+    tableHirePriceTotal = ""
+  }
+
   render() {
     return (
       <div className="payment basket-page">
          <h4 class="basket-title">Ödeme Yap</h4>
          <div className="row">
            <div className="col-md-8">
-            <Form name="nest-messages" validateMessages={validateMessages}>
+            <Form name="nest-messages" validateMessages={validateMessages} onFinish={this.completePayment.bind(this)}>
             <div className="d-flex justify-content-between">
-              <Form.Item name={["user", "name"]} label="Ad-Soyad" rules={[{required: true}]}>
+              <Form.Item name="name" label="Ad-Soyad" rules={[{required: true}]}>
                 <Input placeholder="Ad-Soyad" />
               </Form.Item>
 
-              <Form.Item  name={["user", "number"]} label="Telefon No" rules={[{required: true,type: "number"}]}>
+              <Form.Item name="number" label="Telefon No" rules={[{required: true,type: "number"}]}>
                 <InputNumber placeholder="Telefon No" />
               </Form.Item>
             </div>
 
             <div className="d-flex justify-content-between">
-              <Form.Item  name={["user", "email"]} label="E-posta Adresi" rules={[{required: true,type: "email"}]}>
+              <Form.Item name="email"label="E-posta Adresi" rules={[{required: true,type: "email"}]}>
                 <Input placeholder="E-posta Adresi"/>
               </Form.Item>
-              <Form.Item  name={["user", "country"]} label="Yaşadığınız İl" rules={[{required: true}]}>
+              <Form.Item name="country" label="Yaşadığınız İl" rules={[{required: true}]}>
                 <Select placeholder="İl Seçiniz" allowClear>
                   <Option value="istanbul">İstanbul</Option>
                   <Option value="ankara">Ankara</Option>
@@ -84,37 +127,45 @@ class payment extends PureComponent {
             </div>
 
             <div className="d-flex justify-content-between">
-              <Form.Item  name={["user", "iban"]} label="IBAN Numaranız" rules={[{required: true,type: "number"}]}>
+              <Form.Item name="iban" label="IBAN Numaranız" rules={[{required: true,type: "number"}]}>
                 <InputNumber placeholder="IBAN Numaranız" />
               </Form.Item>
 
-              <Form.Item  name={["user", "hire"]} label="Taksit" rules={[{required: true}]}>
-                <Select placeholder="Kaç Taksit Ödeme İstiyorsunuz?" allowClear onChange={this.selectHireCount} >
+              <Form.Item name="paymentMethod" label="Ödeme Şekliniz" rules={[{required: true}]}>
+              <Radio.Group onChange={this.changePaymentMethod}>
+                <Radio value="hire">Taksit</Radio>
+                <Radio value="cash">Peşin</Radio>
+              </Radio.Group>
+              </Form.Item>
+            </div>
+
+            {this.state.choosePaymentmethod == "hire" &&
+              <Form.Item className="w-100" name="hire" label="Taksit" rules={[{required: true}]}>
+                <Select value={this.state.hire} name="hire" placeholder="Kaç Taksit Ödeme İstiyorsunuz?" allowClear 
+                onChange={value => this.selectHireCount(value)}>
                   <Option value="2">2 Taksit</Option>
-                  <Option value="3">3 Taskit</Option>
+                  <Option value="3">3 Taksit</Option>
                   <Option value="4">4 Taksit</Option>
                 </Select>
               </Form.Item>
-              
+            }
+            {tableHirePriceTotal != null &&
+              <Table dataSource={tableHirePriceTotal} columns={columns} />
+            }
+            <div className="d-flex justify-content-end">
+              <button className="button green mt-3" onClick={this.success}>Ödemeyi Tamamla</button>
             </div>
-
-          <Table dataSource={tableHirePriceTotal} columns={columns} />
-            
-          <div className="d-flex justify-content-end">
-            <button className="button green mt-3">Ödemeyi Tamamla</button>
+           </Form>  
           </div>
 
-          </Form>  
-           </div>
            <div className="col-md-4">
             <div className="basket-summary">
-                <h5 class="basket-title mb-3">Sipariş Özeti</h5>
+                <h5 className="basket-title mb-3">Sipariş Özeti</h5>
                 <BasketSummary basket={this.props.basketList}/>
               </div>
            </div>
          </div>
       </div>
-     
     );
   }
 }
