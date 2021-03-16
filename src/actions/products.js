@@ -22,3 +22,14 @@ export function getProductDetail(slug) {
   };
 }
 
+export function filterProducts(filterCategory, filterValue) {
+  return async dispatch => {
+    await axios.get(`${BASE_URL}/Products?${filterCategory}=${filterValue}`).then(value => {
+      dispatch({
+        type: "FETCH_PRODUCT_FILTER_LIST",
+        payload: value.data,
+      });
+    });
+  };
+}
+

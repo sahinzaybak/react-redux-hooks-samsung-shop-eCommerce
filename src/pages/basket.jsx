@@ -30,26 +30,31 @@ class basket extends PureComponent {
   render() {
     return (
       <div className="basket-page">
-        <div className="basket">
-          <h4 class="basket-title">Sepetim ({this.props.basketList.length} Ürün)</h4>
-          <div className="row">
-            <div className="col-md-8">
-              {this.props.basketList.map((basketList,index) => (
-                <BasketList basket={basketList} basketProductIndex={index}/>
-              ))}
-            </div>
-            <div className="col-md-4">
-              <div className="basket-summary">
-                <h5 class="basket-title mb-3">Sipariş Özeti</h5>
-                <BasketSummary basket={this.props.basketList}/>
+        {this.props.basketList.length == 0 && 
+          <h1>SEPETİNİZDE ÜRÜN BULUNMAMAKTADIR.</h1>
+        }
+        {this.props.basketList.length != 0 && 
+          <div className="basket">
+            <h4 class="basket-title">Sepetim ({this.props.basketList.length} Ürün)</h4>
+            <div className="row">
+              <div className="col-md-8">
+                {this.props.basketList.map((basketList,index) => (
+                  <BasketList basket={basketList} basketProductIndex={index}/>
+                ))}
               </div>
-              <div className="basket-summary coupon mt-3">
-                <CouponCode />
+              <div className="col-md-4">
+                <div className="basket-summary">
+                  <h5 class="basket-title mb-3">Sipariş Özeti</h5>
+                  <BasketSummary basket={this.props.basketList}/>
+                </div>
+                <div className="basket-summary coupon mt-3">
+                  <CouponCode />
+                </div>
+                <a className="button w-100 text-center mt-4 green" onClick={this.orderComplete.bind(this)}>Siparişi Tamamla</a>
               </div>
-              <a className="button w-100 text-center mt-4 green" onClick={this.orderComplete.bind(this)}>Siparişi Tamamla</a>
             </div>
           </div>
-        </div>
+        }
       </div>
     );
   }

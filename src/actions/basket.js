@@ -40,6 +40,15 @@ export function summaryLoading(bool) {
   };
 }
 
+export function basketClear() {
+  return async dispatch => {
+    dispatch({
+      type: "FETCH_BASKET_CLEAR",
+    });
+  };
+}
+
+
 export function basketItemIncreaseCount(newPrice,basketProductIndex,productCount) {
   return async dispatch => {
     dispatch({

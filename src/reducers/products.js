@@ -11,6 +11,11 @@ export default (state = initialState, action) => {
         ...state,
         productList: action.payload
       }
+    case "FETCH_PRODUCT_FILTER_LIST":
+      return{
+        ...state,
+        productList: action.payload
+      }
     case "FETCH_PRODUCT_DETAIL":
       return{
         ...state,

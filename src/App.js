@@ -3,6 +3,7 @@ import productsPage from './pages/products.jsx'
 import productDetail from './pages/productDetail.jsx'
 import basket from './pages/basket.jsx'
 import payment from './pages/payment.jsx'
+import previousOrder from './pages/previousOrder.jsx'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import './assets/global.scss'
@@ -19,6 +20,7 @@ function App() {
         <Route exact path='/:slug' component={productDetail}></Route>
         <Route exact path='/basket/list' component={basket}></Route>
         <Route exact path='/basket/payment' component={payment}></Route>
+        <Route exact path='/basket/prev' component={previousOrder}></Route>
       </Switch>
     </div>
   );

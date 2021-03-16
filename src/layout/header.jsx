@@ -12,13 +12,27 @@ import basketImg from "../assets/images/shopping-cart.svg";
 //Actions
 import {basketItemDelete} from '../actions/basket'
 import {basketStorage} from '../actions/basket'
+import {previousOrder,previousOrderStorage} from '../actions/previousOrder'
+
 const { confirm } = Modal;
 const Header = (product) => {
   if(product.basketList.length != 0)
-    localStorage.setItem("basket", JSON.stringify(product.basketList)); //state basketList yenilendiğinde localStorage'de yenilenir
-  
+    localStorage.setItem("basket", JSON.stringify(product.basketList)); //state basketList yenilendiğinde localStorage'de yenilenir.
+
+  if(product.previousOrderList.length != 0)
+    localStorage.setItem("myPrevOrderList", JSON.stringify(product.previousOrderList)); //state prevOrderList yenilendiğinde localStorage'de yenilenir.
 
   let basket = JSON.parse(localStorage.getItem("basket"));
+  let previousOrder = JSON.parse(localStorage.getItem("myPrevOrderList"));
+
+   //sayfa yenilendiğinde local storage'deki bilgileri state'teki ilgili dizilere doldur.
+  useEffect(() => {
+    if(basket != null)
+      product.basketStorage();
+
+    if(previousOrder != null)
+      product.previousOrderStorage();
+  },[]);
 
   function deleteItem(basketProductId){
     if(product.basketList.length == 1) localStorage.clear();
@@ -54,11 +68,6 @@ const Header = (product) => {
     });
   }
 
-  useEffect(() => { //sayfa yenilendiğinde local storage'deki basket listesini state'te ki basketList'e doldur.
-    if(basket != null)
-      product.basketStorage();
-  },[]);
-
 
   return (
     <div className="header d-flex">
@@ -66,8 +75,9 @@ const Header = (product) => {
         <img src={headerImage} alt="" />
       </div>
       <div className="header-basket">
-        <Link to="/basket/list" className="header-basket__item">
-          {/* <p className="header-basket__text">Önceki Siparişlerim({basket.length})</p> */}
+        <Link to="/basket/prev" className="header-basket__item">
+          {previousOrder == null && (<p className="header-basket__text">Önceki Siparişlerim(0)</p>)}
+          {previousOrder != null && (<p className="header-basket__text">Önceki Siparişlerim({previousOrder.length})</p>)}
         </Link>
         
         <Link to="/basket/list" className="header-basket__item">
@@ -82,7 +92,6 @@ const Header = (product) => {
               <p className="ml-3 mb-2 mt-1">Sepetim ({basket.length})</p>
               {basket != null && basket.map((basket,index) => ( 
                 <div className="d-flex header-basket__products-wrp" key={basket.id}>
-               
                   <div className="d-flex align-items-start">
                     <img src={basket.color.image} alt=""/>
                   </div>
@@ -113,12 +122,17 @@ const Header = (product) => {
 const mapStateToProps = (state) => {
   return {
     basketList: state.basket.basketList,
+    previousOrderList: state.previousOrder.previousOrderList
+    
   };
 };
 
 const mapDispatchToProps = {
   basketItemDelete,
-  basketStorage
+  basketStorage,
+  previousOrder,
+  previousOrderStorage
+  
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(Header);

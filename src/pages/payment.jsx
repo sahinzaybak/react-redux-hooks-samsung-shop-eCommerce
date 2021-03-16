@@ -5,6 +5,11 @@ import { connect } from "react-redux";
 
 //Components
 import BasketSummary from '../components/basket-page/basketSummary'
+
+//Actions
+import {basketClear} from '../actions/basket'
+import {previousOrder} from '../actions/previousOrder'
+
 const { Option } = Select;
 const validateMessages = {
   required: "Bu alan zorunludur!",
@@ -88,12 +93,8 @@ class payment extends PureComponent {
         return new Promise((resolve, reject) => {
           setTimeout(Math.random() > 1000 ? resolve  : reject, 1000);
           setTimeout(() => {
-            localStorage.setItem("myPreviousOrder", JSON.stringify( //Siparişi localStorage kaydet.
-              [...vm.props.basketList.concat({
-                orderDate: todayDate, 
-                orderPrice: vm.state.tableShow == false ? totalPrice : tableHirePriceTotal
-              })]
-            )); 
+            vm.props.previousOrder(vm.props.basketList,todayDate, vm.state.tableShow, totalPrice, tableHirePriceTotal) //Önceki siparişler state kaydet.
+         
             Modal.success({
               centered:true,
               title: 'Ödemeniz Başarılı!',
@@ -103,7 +104,11 @@ class payment extends PureComponent {
               `${totalPrice} TL ödemeniz başarıyla yapıldı. Teşekkür ederiz!` : 
               `${tableHirePriceTotal[0].price}'lik ilk taksidinizi ${tableHirePriceTotal[0].date} tarihine kadar ödeyebilirsiniz. Teşekkür ederiz!`,
               onOk() {
-                // vm.history.push("/")
+                vm.props.history.push("/")
+                localStorage.removeItem("basket")
+                localStorage.removeItem("totalPrice")
+                localStorage.removeItem("couponCode")
+                vm.props.basketClear()
               },
             });
           }, 1000);
@@ -147,8 +152,8 @@ class payment extends PureComponent {
                   <Option value="istanbul">İstanbul</Option>
                   <Option value="ankara">Ankara</Option>
                   <Option value="izmir">İzmir</Option>
-                  <Option value="istanbul">Antalya</Option>
-                  <Option value="ankara">Muğla</Option>
+                  <Option value="antalya">Antalya</Option>
+                  <Option value="muğla">Muğla</Option>
                 </Select>
               </Form.Item>
             </div>
@@ -201,4 +206,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(payment);
+const mapDispatchToProps = {
+  basketClear,
+  previousOrder
+};
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(payment);
