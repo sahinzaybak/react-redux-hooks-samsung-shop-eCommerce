@@ -1,10 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
+import {ExclamationCircleOutlined, DeleteOutlined } from '@ant-design/icons';
+import { store } from 'react-notifications-component';
+import { Modal } from 'antd';
 
-import {basketItemIncreaseCount} from '../../actions/basket'
-import {summaryLoading} from '../../actions/basket'
-
+//Actions
+import {basketItemIncreaseCount,summaryLoading,basketItemDelete} from '../../actions/basket'
+const { confirm } = Modal;
 class basketList extends PureComponent {
   state = {
     productCount: this.props.basket.count,
@@ -12,9 +15,9 @@ class basketList extends PureComponent {
     isSpinner:false
   }
   
-  increaseProductCount = (productCount,basketProductIndex) => {
-    var newPrice = this.props.basket.memory.price * productCount
-    this.setState({price : newPrice})
+  increaseProductCount = (productCount, basketProductIndex) => {
+    var newPrice = this.state.price * productCount
+    // this.setState({price : newPrice})
     this.setState({productCount : productCount})
     this.setState({isSpinner : true})
 
@@ -23,6 +26,43 @@ class basketList extends PureComponent {
 
     setTimeout(() => {this.setState({isSpinner : false})}, 700);
     setTimeout(() => {this.props.summaryLoading(false)}, 700);
+  }
+
+
+  deleteItem(basketProductId){
+    const vm = this.props
+    confirm({
+      title: 'Ürünü sepetten çıkarmak istediğinize emin misiniz?',
+      icon: <ExclamationCircleOutlined />,
+      okText: 'Evet',
+      centered:true,
+      okType: 'danger',
+      cancelText: 'Hayır',
+      confirmLoading:true,
+      onOk() {
+        if(vm.basketList.length == 1) localStorage.clear();
+        return new Promise((resolve, reject) => {
+          setTimeout(Math.random() > 1000 ? resolve  : reject, 1000);
+          setTimeout(() => {
+            vm.basketItemDelete(basketProductId) //sepetten seçili ürünü sil.
+            store.addNotification({
+              message: "Ürün sepetten çıkarıldı",
+              type: "success",
+              insert: "top",
+              width:250,
+              showIcon:true,
+              container: "top-right",
+              animationIn: ["animate__animated", "animate__fadeIn"],
+              animationOut: ["animate__animated", "animate__fadeOut"],
+              dismiss: {
+                duration: 2000,
+                onScreen: false
+              },
+            })
+          }, 1000);
+        }).catch(() =>false);
+      },
+    });
   }
   render() {
     return (
@@ -34,11 +74,12 @@ class basketList extends PureComponent {
           <div className="basket-item__info">
             <h5 className="mb-2 mt-2">{this.props.basket.productName}</h5>
             <p>Renk: {this.props.basket.color.name}</p>
-            <p>Hafıza: {this.props.basket.memory.gb}</p>
+            <p>Hafıza: {this.props.basket.memory.gb} GB</p>
             <p>SIM: Tek SIM</p>
           </div>
           <div className="basket-item__counter ml-5 mr-5">
-            <input type="number" value={this.props.basket.count} minlength="1" onChange={e => this.increaseProductCount(e.target.value,this.props.basketProductIndex)}/> Adet
+            <input type="number" value={this.props.basket.count} min="1" pattern="[0-9]*"  onChange={e => 
+              this.increaseProductCount(e.target.value, this.props.basketProductIndex)}/> Adet
           </div>
           <div className="basket-item__price">
             <div className="d-flex">
@@ -47,6 +88,9 @@ class basketList extends PureComponent {
               </div>
               <h4 className={`${this.state.isSpinner ? "d-none" : ""}`}>{this.props.basket.memory.price} TL</h4>
             </div>
+          </div>
+          <div className="basket-item__price ml-5 mr-5">
+          <p onClick={() => {this.deleteItem(this.props.basketProductIndex)}}><DeleteOutlined /></p>
           </div>
         </div>
       </div>
@@ -60,10 +104,13 @@ basketList.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  return{}
+  return {
+    basketList: state.basket.basketList,
+  };
 };
 
 const mapDispatchToProps = {
+  basketItemDelete,
   basketItemIncreaseCount,
   summaryLoading
 };

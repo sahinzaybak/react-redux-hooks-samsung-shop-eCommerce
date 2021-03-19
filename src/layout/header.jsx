@@ -35,15 +35,16 @@ const Header = (product) => {
   },[]);
 
   function deleteItem(basketProductId){
-    if(product.basketList.length == 1) localStorage.clear();
     confirm({
       title: 'Ürünü sepetten çıkarmak istediğinize emin misiniz?',
       icon: <ExclamationCircleOutlined />,
       okText: 'Evet',
+      centered:true,
       okType: 'danger',
       cancelText: 'Hayır',
       confirmLoading:true,
       onOk() {
+        if(product.basketList.length == 1) localStorage.clear();
         return new Promise((resolve, reject) => {
           setTimeout(Math.random() > 1000 ? resolve  : reject, 1000);
           setTimeout(() => {
@@ -67,8 +68,6 @@ const Header = (product) => {
       },
     });
   }
-
-
   return (
     <div className="header d-flex">
       <div className="header-img">

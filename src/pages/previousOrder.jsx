@@ -28,7 +28,7 @@ class previousOrder extends PureComponent {
   }
   render() {
     return (
-      <div className="basket-page">
+      <div className="basket-page previous">
         <div className="basket">
           <h4 class="basket-title">Önceki Siparişlerim ({this.props.previousOrderList.length} Ürün)</h4>
           <div className="row">

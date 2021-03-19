@@ -93,8 +93,7 @@ class payment extends PureComponent {
         return new Promise((resolve, reject) => {
           setTimeout(Math.random() > 1000 ? resolve  : reject, 1000);
           setTimeout(() => {
-            vm.props.previousOrder(vm.props.basketList,todayDate, vm.state.tableShow, totalPrice, tableHirePriceTotal) //Önceki siparişler state kaydet.
-         
+            vm.props.previousOrder(vm.props.basketList,todayDate, vm.state.tableShow, vm.state.choosePaymentmethod, totalPrice, tableHirePriceTotal) //Önceki siparişler state kaydet.
             Modal.success({
               centered:true,
               title: 'Ödemeniz Başarılı!',

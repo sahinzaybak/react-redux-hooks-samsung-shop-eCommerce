@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react';
 import { connect } from "react-redux";
 import { Modal } from 'antd';
+import {Link} from 'react-router-dom';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import basketImg from "../assets/images/shopping-cart.svg";
 //Components
 import BasketList from '../components/basket-page/basketList'
 import BasketSummary from '../components/basket-page/basketSummary'
@@ -13,6 +15,7 @@ class basket extends PureComponent {
     confirm({
       title: 'Siparişi tamamlamak istediğinizden emin misiniz?',
       icon: <ExclamationCircleOutlined />,
+      centered:true,
       okText: 'Evet',
       okType: 'success',
       cancelText: 'Hayır',
@@ -31,7 +34,17 @@ class basket extends PureComponent {
     return (
       <div className="basket-page">
         {this.props.basketList.length == 0 && 
-          <h1>SEPETİNİZDE ÜRÜN BULUNMAMAKTADIR.</h1>
+          <div className="d-flex justify-content-between align-items-center no-product">
+            <div className="d-flex">
+              <img className="mr-4" src={basketImg} alt="" />
+              <h5>Sepetinizde ürün bulunmamaktadır.</h5>
+            </div>
+           <div>
+            <Link to="/">
+             <button className="button green">Alışverişe Başla</button>
+            </Link>
+           </div>
+          </div>      
         }
         {this.props.basketList.length != 0 && 
           <div className="basket">

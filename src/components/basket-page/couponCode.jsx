@@ -71,7 +71,6 @@ class CouponCode extends Component {
         <a className="button" onClick={(e) => this.checkCode(e.target.value)}>Onayla</a>
       </div>
     </div>
-     
     );
   }
 };

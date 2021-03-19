@@ -39,6 +39,14 @@
 					border-bottom: 1px solid #e83968;
 				}
 			}
+			.anticon-delete{
+				font-size: 14px;
+				cursor: pointer;
+				transition: all .5s;
+				&:hover{
+					color:#d83075;
+				}
+			}
 		}
 		&-summary{
 			border: 1px solid #dadada;
@@ -89,6 +97,18 @@
 					opacity: 0.4;
 					pointer-events: none;
 				}
+			}
+		}
+	}
+	&.previous{
+		.previous-item{
+	    margin-bottom: 15px;
+			border-bottom: 1px solid #ececec;
+			padding-bottom: 15px;
+			&:last-child{
+				margin:0;
+				padding: 0;
+				border-bottom:0;
 			}
 		}
 	}
