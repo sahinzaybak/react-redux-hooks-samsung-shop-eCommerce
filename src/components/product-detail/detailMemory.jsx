@@ -9,7 +9,10 @@ const DetailMemory = (product) => {
   //holdChoosenProductInfo(seçilenRenkId, seçilenHafızaId) => seçili renk ve hafızaya göre ürün detay bilgilerini günceller.
   //Hafıza değişimi (Hafıza seçimine göre state değişimi)
   function changeMemory(productMemoryId){
+    let memoryId = productMemoryId;
+    let colorId = product.selectedColor.id;
     product.holdChoosenProductInfo(product.selectedColor.id, productMemoryId)
+    localStorage.setItem("selectedProductInfo", JSON.stringify({colorId, memoryId}))
   }
 
   return (

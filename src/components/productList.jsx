@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { connect } from "react-redux";
 import {Link} from 'react-router-dom';
 import PropTypes from "prop-types";
@@ -7,7 +7,7 @@ import { Tooltip } from 'antd';
 //Actions
 import {holdChoosenProductInfo} from '../actions/productStorage'
 
-//Function componenet servis return sorunu mapDispatchToProps değerini bu kısmı da yazmamız gerekli.
+//Function componenet servis return dispatch sorunu mapDispatchToProps değerini bu kısmı da yazmamız gerekli.
 const ProductList = ({ product, holdChoosenProductInfo }) => { 
   const [colorId, setColorId] = useState(0) 
   const [memoryId, setMemoryId] = useState(0) 
@@ -16,7 +16,8 @@ const ProductList = ({ product, holdChoosenProductInfo }) => {
   const [isSpinner, setSpinner] = useState(false) 
 
   function holdChoosenInfo(){ //seçilen ürün bilgilerini (renk, gb) detay sayfamızda kullabilmek için state'e attık. 
-    holdChoosenProductInfo(colorId,memoryId)
+    holdChoosenProductInfo(colorId, memoryId)
+    localStorage.setItem("selectedProductInfo", JSON.stringify({colorId, memoryId}))
   }
 
   return (
@@ -63,7 +64,9 @@ ProductList.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    productStorage: state.productStorage.productStorageInfo
+  };
 };
 
 const mapDispatchToProps = {

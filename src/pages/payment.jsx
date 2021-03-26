@@ -41,29 +41,73 @@ let tableHirePriceTotal = null;
 let totalPrice;
 let today = new Date()
 let date;
+let isCouponCode;
 const { confirm } = Modal;
 class payment extends PureComponent {
   state = {
     dataSource:[],
     choosePaymentmethod:'',
     hire:'',
-    tableShow:false
+    tableShow:false,
   }
 
   componentDidMount(){ //her zaman default 2 taksit
+    isCouponCode = localStorage.getItem('couponCode')
     totalPrice = localStorage.getItem('totalPrice')
     tableHirePriceTotal = [...this.state.dataSource];
+    let price = (totalPrice / 2).toFixed(3);
     for (let index = 1; index <= 2; index++) {
       date = today.getDate() + '-' + "0" + (today.getMonth() + index +1) + '-' + today.getFullYear();
-      tableHirePriceTotal.push({key: '1', hire: index, date: date, price: (totalPrice / 2).toFixed(3) + " " + "TL"});
-    }
+      if(price * 2 > totalPrice && index == 1){ //sadece ilk taksitten çıkar
+        tableHirePriceTotal.push({
+          key: '1',
+          hire: index, 
+          date: date,
+          price: (parseFloat(price) - 0.001).toFixed(3) + " " + "TL"});
+      }
+      else if (price * 2 < totalPrice && index == 1){
+        tableHirePriceTotal.push({
+          key: '1',
+          hire: index, 
+          date: date,
+          price: (parseFloat(price) + 0.001).toFixed(3) + " " + "TL"});
+      }
+      else{
+        tableHirePriceTotal.push({
+          key: '1',
+          hire: index, 
+          date: date,
+          price: price + " " + "TL"});
+      }
   }
+}
 
   selectHireCount = (count) => { //taksit seçeneği (2,3,4)
     tableHirePriceTotal = [...this.state.dataSource];
+    let price = (totalPrice / count).toFixed(3);
     for (let index = 1; index <= count; index++) {
       date = today.getDate() + '-' + "0" + (today.getMonth() + index +1) + '-' + today.getFullYear();
-      tableHirePriceTotal.push({key: '1', hire: index, date: date, price: (totalPrice / count).toFixed(3) + " " + "TL"});
+      if(price * count > totalPrice && index == 1){ //sadece ilk taksitten çıkar
+        tableHirePriceTotal.push({
+          key: '1',
+          hire: index, 
+          date: date,
+          price: (parseFloat(price) - 0.001).toFixed(3) + " " + "TL"});
+      }
+      else if (price * count < totalPrice && index == 1){
+        tableHirePriceTotal.push({
+          key: '1',
+          hire: index, 
+          date: date,
+          price: (parseFloat(price) + 0.001).toFixed(3) + " " + "TL"});
+      }
+      else{
+        tableHirePriceTotal.push({
+          key: '1',
+          hire: index, 
+          date: date,
+          price: price + " " + "TL"});
+      }
       this.setState({ tableHirePriceTotal });
     }
   }
@@ -71,11 +115,11 @@ class payment extends PureComponent {
   changePaymentMethod = (e) => { //ödeme şekli (taksit, peşin)
     this.setState({choosePaymentmethod : e.target.value})
     if(e.target.value == "cash"){
-      this.setState({tableShow:false})
+      this.setState({tableShow: false})
     }
    
     else
-      this.setState({tableShow:true})
+      this.setState({tableShow: true})
   };
 
   completePayment = () => { // Ödemeyi Tamamla
@@ -93,7 +137,7 @@ class payment extends PureComponent {
         return new Promise((resolve, reject) => {
           setTimeout(Math.random() > 1000 ? resolve  : reject, 1000);
           setTimeout(() => {
-            vm.props.previousOrder(vm.props.basketList,todayDate, vm.state.tableShow, vm.state.choosePaymentmethod, totalPrice, tableHirePriceTotal) //Önceki siparişler state kaydet.
+            vm.props.previousOrder(vm.props.basketList, isCouponCode, todayDate, vm.state.tableShow, vm.state.choosePaymentmethod, totalPrice, tableHirePriceTotal) //Önceki siparişler state kaydet.
             Modal.success({
               centered:true,
               title: 'Ödemeniz Başarılı!',

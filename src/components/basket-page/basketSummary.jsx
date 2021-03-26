@@ -2,17 +2,17 @@ import React,{useState,useEffect} from 'react'
 import { connect } from "react-redux";
 
 const BasketSummary = (basketList) => {
-  const [cargoPrice, setCargoPrice] = useState(8) //Kargo ücreti
+  const [cargoPrice, setCargoPrice] = useState(parseFloat('9.99')) //Kargo ücreti
   const [totalPrice, setTotalPrice] = useState(0)
   const [couponCode, isCouponCode] = useState(0)
 
   useEffect(() => { //componentDidUpdate () => her state değişiminde tetiklenir.
     isCouponCode(localStorage.getItem('couponCode'))
     if(couponCode)
-      setTotalPrice(basketList.basket.reduce((a,v) =>  a = (a + v.memory.price) + 0.008 - (0.100), 0 ).toFixed(3))
+      setTotalPrice(basketList.basket.reduce((a,v) =>  a = (a + v.memory.price) + parseFloat('0.09,099') - (0.100), 0 ).toFixed(3))
 
     else
-     setTotalPrice(basketList.basket.reduce((a,v) =>  a = (a + v.memory.price) + 0.008 , 0 ).toFixed(3))
+     setTotalPrice(basketList.basket.reduce((a,v) =>  a = (a + v.memory.price) + parseFloat('0.09,099') , 0 ).toFixed(3))
 
     localStorage.setItem('totalPrice', totalPrice)
   })
@@ -40,7 +40,7 @@ const BasketSummary = (basketList) => {
           <p> İndirimsiz Sipariş Tutarı: </p>
           <div className="d-flex ml-2">
             <span className={`${basketList.isBasketLoading ? "d-none" : ""}`}>
-            {(basketList.basket.reduce((a,v) =>  a = (a + v.memory.price) + 0.008, 0 ).toFixed(3))} TL 
+            {(basketList.basket.reduce((a,v) =>  a = (a + v.memory.price) +  parseFloat('0.09,099'), 0 ).toFixed(3))} TL 
             </span>
             <div className={`spinner ml-2 ${!basketList.isBasketLoading  ? "d-none" : ""}`} >
               <div className="spinner-border text-primary" role="status"></div>

@@ -68,16 +68,16 @@ class basketList extends PureComponent {
     return (
       <div className="basket-item">
         <div className="d-flex align-items-center">
-            <div className="basket-item__img">
+            <div className="basket-item__img flex-shrink-0">
             <img src={this.props.basket.color.image} alt=""/>
           </div>
-          <div className="basket-item__info">
+          <div className="basket-item__info d-flex flex-column flex-shrink-0">
             <h5 className="mb-2 mt-2">{this.props.basket.productName}</h5>
             <p>Renk: {this.props.basket.color.name}</p>
             <p>Hafıza: {this.props.basket.memory.gb} GB</p>
             <p>SIM: Tek SIM</p>
           </div>
-          <div className="basket-item__counter ml-5 mr-5">
+          <div className="basket-item__counter ml-5 mr-5 flex-shrink-0">
             <input type="number" value={this.props.basket.count} min="1" pattern="[0-9]*"  onChange={e => 
               this.increaseProductCount(e.target.value, this.props.basketProductIndex)}/> Adet
           </div>
@@ -86,10 +86,10 @@ class basketList extends PureComponent {
               <div className={`spinner mt-1 ${!this.state.isSpinner ? "d-none" : ""}`} >
                 <div className="spinner-border text-primary" role="status"></div>
               </div>
-              <h4 className={`${this.state.isSpinner ? "d-none" : ""}`}>{this.props.basket.memory.price} TL</h4>
+              <h4 className={`${this.state.isSpinner ? "d-none" : ""}`}>  {this.props.basket.memory.price.toFixed(3)} TL</h4>
             </div>
           </div>
-          <div className="basket-item__price ml-5 mr-5">
+          <div className="basket-item__price delete ml-5 mr-5">
           <p onClick={() => {this.deleteItem(this.props.basketProductIndex)}}><DeleteOutlined /></p>
           </div>
         </div>

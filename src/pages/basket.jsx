@@ -41,7 +41,7 @@ class basket extends PureComponent {
             </div>
            <div>
             <Link to="/">
-             <button className="button green">Alışverişe Başla</button>
+             <button className="button green">Hemen Alışverişe Başla</button>
             </Link>
            </div>
           </div>      

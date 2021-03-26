@@ -2,6 +2,9 @@ import React, { PureComponent } from 'react';
 import { connect } from "react-redux";
 import { Modal } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import basketImg from "../assets/images/shopping-cart.svg";
+import {Link} from 'react-router-dom';
+
 //Components
 import PreviousOrder from '../components/previousOrderList'
 const { confirm } = Modal;
@@ -29,7 +32,22 @@ class previousOrder extends PureComponent {
   render() {
     return (
       <div className="basket-page previous">
-        <div className="basket">
+        {this.props.previousOrderList.length == 0 && 
+          <div className="d-flex justify-content-between align-items-center no-product">
+            <div className="d-flex">
+              <img className="mr-4" src={basketImg} alt="" />
+              <h5>Önceden yaptığınız alışverişiniz bulunmamaktadır.</h5>
+            </div>
+            <div>
+            <Link to="/">
+              <button className="button green">Hemen Alışverişe Başla</button>
+            </Link>
+            </div>
+          </div>      
+        }
+
+        {this.props.previousOrderList.length != 0 && 
+          <div className="basket">
           <h4 class="basket-title">Önceki Siparişlerim ({this.props.previousOrderList.length} Ürün)</h4>
           <div className="row">
             <div className="col-md-8">
@@ -38,8 +56,9 @@ class previousOrder extends PureComponent {
               ))}
             </div>
           </div>
-        </div>
-      </div>
+        </div>    
+      }
+    </div>
     );
   }
 }

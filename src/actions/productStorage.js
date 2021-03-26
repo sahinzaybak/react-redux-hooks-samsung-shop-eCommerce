@@ -1,10 +1,11 @@
-export function holdChoosenProductInfo(_colorId, _memoryId) {
+export function holdChoosenProductInfo(colorId, memoryId) {
+  debugger;
   return async dispatch => {
     dispatch({
       type: "FETCH_PRODUCT_SELECTED_INFO",
       payload: {
-        _colorId,
-        _memoryId
+        colorId,
+        memoryId
       }
     });
   };

@@ -7,7 +7,10 @@ import {holdChoosenProductInfo} from '../../actions/productStorage'
 const DetailColor = product => {
   //holdChoosenProductInfo(seçilenRenkId, seçilenHafızaId) => seçili renk ve hafızaya göre ürün detay bilgilerini günceller.
   function changeColorImage(productColorId){
+    let memoryId = product.selectedMemory.id;
+    let colorId = productColorId;
     product.holdChoosenProductInfo(productColorId, product.selectedMemory.id) 
+    localStorage.setItem("selectedProductInfo", JSON.stringify({colorId, memoryId}))
   }
   return (
     <div className="product-detail__color mt-5">

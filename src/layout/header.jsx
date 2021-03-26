@@ -25,7 +25,7 @@ const Header = (product) => {
   let basket = JSON.parse(localStorage.getItem("basket"));
   let previousOrder = JSON.parse(localStorage.getItem("myPrevOrderList"));
 
-   //sayfa yenilendiğinde local storage'deki bilgileri state'teki ilgili dizilere doldur.
+   //sayfa yenilendiğinde local storage'deki bilgileri state'teki ilgili dizilere doldur.  --> [] sadece bir kere..
   useEffect(() => {
     if(basket != null)
       product.basketStorage();
@@ -99,7 +99,7 @@ const Header = (product) => {
                     <p className="header-basket__products-item" >Renk: {basket.color.name}</p>
                     <p className="header-basket__products-item">Hafıza: {basket.memory.gb} GB</p>
                     <p className="header-basket__products-item">SIM: Tek Sim</p>
-                    <p className="header-basket__products-price mt-1">{basket.memory.price} TL</p>
+                    <p className="header-basket__products-price mt-1">{basket.memory.price.toFixed(3)} TL</p>
                     <p className="header-basket__products-s mt-1">{basket.count} Adet</p>
                   </div>
                   <div className="ml-auto mr-2">

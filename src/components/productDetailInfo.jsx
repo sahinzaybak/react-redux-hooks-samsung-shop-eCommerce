@@ -12,19 +12,20 @@ import DetailSim from './product-detail/detailSim'
 
 // function componenet mapStateToProps this.props yerine "productStorage" burada tanımlamamaız gerekli ki "productStorage" diye kullanabilelim.
 const ProductDetailInfo = ({productInfo, productStorage}) => {
+  debugger;
   const [selectedColor, setSelectedColor] = useState('')
   const [selectedColorImage, setSelectedColorImage] = useState('')
   const [selectedMemory, setSelectedMemory] = useState('')
 
   useEffect(() => {
-    if(productInfo.length != 0 && productStorage.length != 0 ){
-      setSelectedMemory(productInfo.memory.find(memory => memory.id === productStorage._memoryId)) // seçili hafıza
-      setSelectedColor(productInfo.colors.find(color => color.id == productStorage._colorId)) // seçili renk
+    if(productInfo.length != 0 && productStorage != null ){
+      setSelectedMemory(productInfo.memory.find(memory => memory.id === productStorage.memoryId)) // seçili hafıza
+      setSelectedColor(productInfo.colors.find(color => color.id == productStorage.colorId)) // seçili renk
       productInfo.colorsImage.forEach(element => { // seçili renge ait resimler
-        if(Object.keys(element).find(colorImageKey => colorImageKey == productStorage._colorId))
-          setSelectedColorImage(element[productStorage._colorId])
+        if(Object.keys(element).find(colorImageKey => colorImageKey == productStorage.colorId))
+          setSelectedColorImage(element[productStorage.colorId])
       });
-    }      
+    }  
   })
   
   //Slider

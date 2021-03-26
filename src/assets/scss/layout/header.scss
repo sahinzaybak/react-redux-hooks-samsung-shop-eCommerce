@@ -9,13 +9,8 @@
     align-items: center;
     justify-content: flex-end;
     background-color: white;
-    cursor: pointer;
-    &:hover{
-      .header-basket__products{
-        pointer-events:all;
-        opacity: 1;
-      }
-    }
+  
+    
  
     &__item{
       display: flex;
@@ -23,6 +18,14 @@
       margin-right: 8%;
       img{
         width: 32px;
+      }
+      &:nth-child(2){
+        &:hover{
+          ~ .header-basket__products{
+            pointer-events:all;
+            opacity: 1;
+          }
+        }
       }
     }
     &__text{

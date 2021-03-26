@@ -11,7 +11,7 @@ import { getProductList } from "../actions/products";
 
 class products extends PureComponent {
   static propTypes = {
-    Products: propTypes.array.isRequired,
+    products: propTypes.array.isRequired,
   };
 
   componentDidMount() {
@@ -30,7 +30,7 @@ class products extends PureComponent {
           <div className="col-md-9">
             <div className="products-page__list mt-4">
               <div className="row">
-                {this.props.Products.map((productInfo) => (
+                {this.props.products.map((productInfo) => (
                   <ProductList product={productInfo} key={productInfo.id}/>
                 ))}
               </div>
@@ -44,7 +44,7 @@ class products extends PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-    Products: state.products.productList,
+    products: state.products.productList,
   };
 };
 
