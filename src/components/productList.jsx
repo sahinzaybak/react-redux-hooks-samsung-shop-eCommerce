@@ -25,24 +25,24 @@ const ProductList = ({ product, holdChoosenProductInfo }) => {
       <div className="products-page__item">
         <img src={product.colors[colorId].image} />
         <div className="d-flex justify-content-center mt-3">
-          {product.colors.map(rgb => 
+          {product.colors.map((rgb,index) => 
             <Tooltip title={rgb.name} color={rgb.color} key={rgb.id} >
-              <p className={`products-page__color ${isActiveColor ? "active" : ""}`} style={{backgroundColor: rgb.color}} 
+              <p className={`products-page__color ${index == isActiveColor ? "active" : ""}`} key={index} style={{backgroundColor: rgb.color}} 
               onClick={() => {
                 setColorId(rgb.id);
-                setActiveColor(true)} 
+                setActiveColor(index)} 
               }></p>
             </Tooltip>
           )}
         </div>
         <div className="d-flex justify-content-center mt-4">
-          {product.memory.map(memory =>
-            <p className={`products-page__memory ${isActiveMemory ? "active" : ""}`} key={memory.id} 
+          {product.memory.map((memory,index) =>
+            <p className={`products-page__memory ${index == isActiveMemory ? "active" : ""}`} key={memory.id} 
             onClick={() => {
               setSpinner(true)
               setTimeout(() => {setMemoryId(memory.id)}, 700);
               setTimeout(() => {setSpinner(false)}, 700);
-              setActiveMemory(true)} 
+              setActiveMemory(index)} 
             } >{memory.gb} GB</p>
           )}
         </div>

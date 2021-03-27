@@ -36,7 +36,10 @@
 		border-radius: 16px;
 		letter-spacing: -0.7px;
 		cursor: pointer;
-	
+		transition: all .3s;
+		&.active{
+			background-color: #6da7ef1f;
+		}
 	}
 
 	&__color {
@@ -47,10 +50,14 @@
 		border: 1px solid rgba(0, 0, 0, .1);
 		margin-right: 15px;
 		cursor: pointer;
+		transition: all 0.1s ease;
 		&.small{
 			width: 16px;
 			height: 16px;
 			border:none
+		}
+		&.active{
+			border-color: black;
 		}
 	}
 

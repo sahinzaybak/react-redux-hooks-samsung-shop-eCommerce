@@ -28,7 +28,7 @@ class CouponCode extends Component {
       setTimeout(() => {
         this.props.summaryLoading(false)
         store.addNotification({
-          message: "Kupon kodunuz onaylandı.",
+          message: "İndirim kodunuz onaylandı.",
           type: "success",
           insert: "top",
           width:250,
@@ -45,7 +45,7 @@ class CouponCode extends Component {
     }
     else{
       store.addNotification({
-        message: "Hatalı kupon kodu girdiniz.",
+        message: "Hatalı indirim kodu girdiniz.",
         type: "danger",
         insert: "top",
         width:250,
@@ -63,9 +63,9 @@ class CouponCode extends Component {
   render(){
     return (
       <div className={`${localStorage.getItem('couponCode') ? "disabled" : ""}`}>
-        <h5 class="basket-title mb-3">Kupon Kodu</h5>
+        <h5 class="basket-title mb-3">İndirim Kodu</h5>
         <div className="d-flex justify-content-between">
-          <input type="text" placeholder="Kupon Kodu Giriniz" name="couponCode" 
+          <input type="text" placeholder="İndirim Kodu Giriniz" name="couponCode" 
           onChange={this.handleTextChanged} 
           value={this.state.couponCode} />
         <a className="button" onClick={(e) => this.checkCode(e.target.value)}>Onayla</a>
