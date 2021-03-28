@@ -9,7 +9,8 @@ const DetailColor = product => {
   function changeColorImage(productColorId){
     let memoryId = product.selectedMemory.id;
     let colorId = productColorId;
-    product.holdChoosenProductInfo(productColorId, product.selectedMemory.id) 
+    let simId = product.selectedSim.id;
+    product.holdChoosenProductInfo(colorId, memoryId, simId) 
     localStorage.setItem("selectedProductInfo", JSON.stringify({colorId, memoryId}))
   }
   return (

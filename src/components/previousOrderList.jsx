@@ -4,7 +4,6 @@ import {CheckCircleTwoTone } from '@ant-design/icons';
 import { Tooltip } from 'antd';
 
 const previousOrderList = ({ prevOrder }) => { 
-  debugger;
   function tableModal(){
     const columns = [
       {
@@ -54,8 +53,8 @@ const previousOrderList = ({ prevOrder }) => {
               <div className="basket-item__info">
                 <h5 className="mb-2 mt-2">{orderList.productName}</h5>
                 <p>Renk: {orderList.color.name}</p>
-                <p>Hafıza: {orderList.memory.gb}</p>
-                <p>SIM: Tek SIM</p>
+                <p>Hafıza: {orderList.memory.gb} GB</p>
+                <p>SIM: {orderList.sim.name} Kart</p>
               </div>
               <div className="basket-item__counter text-center ml-5 mr-5">
                 <p className="mb-1">Adet</p>

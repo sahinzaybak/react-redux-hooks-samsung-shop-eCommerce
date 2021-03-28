@@ -98,7 +98,7 @@ const Header = (product) => {
                     <h4 className="header-basket__products-name mt-1 mb-2">{basket.productName}</h4>
                     <p className="header-basket__products-item" >Renk: {basket.color.name}</p>
                     <p className="header-basket__products-item">Hafıza: {basket.memory.gb} GB</p>
-                    <p className="header-basket__products-item">SIM: Tek Sim</p>
+                    <p className="header-basket__products-item">SIM: {basket.sim.name} Kart</p>
                     <p className="header-basket__products-price mt-1">{basket.memory.price.toFixed(3)} TL</p>
                     <p className="header-basket__products-s mt-1">{basket.count} Adet</p>
                   </div>

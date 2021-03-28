@@ -11,8 +11,9 @@ const DetailMemory = (product) => {
   function changeMemory(productMemoryId){
     let memoryId = productMemoryId;
     let colorId = product.selectedColor.id;
-    product.holdChoosenProductInfo(product.selectedColor.id, productMemoryId)
-    localStorage.setItem("selectedProductInfo", JSON.stringify({colorId, memoryId}))
+    let simId = product.selectedSim.id;
+    product.holdChoosenProductInfo(colorId, memoryId, simId)
+    localStorage.setItem("selectedProductInfo", JSON.stringify({colorId, memoryId, simId}))
   }
 
   return (
@@ -26,7 +27,6 @@ const DetailMemory = (product) => {
       </div>
       <div className="text-center">
         <div className="d-flex align-items-center flex-wrap mt-4">
-       
           {product.productInfo.length != 0 && product.productInfo.memory.map(productMemory =>
             <div className={`product-detail__color-item mb-3 p-2 pb-3 ${product.selectedMemory.id == productMemory.id ? "active" : ""}`} 
             key={productMemory.id} onClick={() => {

@@ -12,15 +12,16 @@ import DetailSim from './product-detail/detailSim'
 
 // function componenet mapStateToProps this.props yerine "productStorage" burada tanımlamamaız gerekli ki "productStorage" diye kullanabilelim.
 const ProductDetailInfo = ({productInfo, productStorage}) => {
-  debugger;
   const [selectedColor, setSelectedColor] = useState('')
   const [selectedColorImage, setSelectedColorImage] = useState('')
   const [selectedMemory, setSelectedMemory] = useState('')
+  const [selectedSim, setSelectedSim] = useState('')
 
   useEffect(() => {
     if(productInfo.length != 0 && productStorage != null ){
       setSelectedMemory(productInfo.memory.find(memory => memory.id === productStorage.memoryId)) // seçili hafıza
       setSelectedColor(productInfo.colors.find(color => color.id == productStorage.colorId)) // seçili renk
+      setSelectedSim(productInfo.sim.find(sim => sim.id == productStorage.simId)) // seçili sim
       productInfo.colorsImage.forEach(element => { // seçili renge ait resimler
         if(Object.keys(element).find(colorImageKey => colorImageKey == productStorage.colorId))
           setSelectedColorImage(element[productStorage.colorId])
@@ -39,7 +40,7 @@ const ProductDetailInfo = ({productInfo, productStorage}) => {
 
   return (
     <div>
-      <DetailHeader name={productInfo.name} id={productInfo.id} price={selectedMemory.price} selectedColor={selectedColor} selectedMemory={selectedMemory}  />
+      <DetailHeader name={productInfo.name} id={productInfo.id} price={selectedMemory.price} selectedColor={selectedColor} selectedMemory={selectedMemory} selectedSim={selectedSim}  />
       <div className="row h-100">
         <div className="col-md-6">
           <div className="product-detail__slider h-100">
@@ -53,14 +54,20 @@ const ProductDetailInfo = ({productInfo, productStorage}) => {
             <DetailColor 
             selectedColor={selectedColor} 
             productInfo={productInfo} 
+            selectedSim={selectedSim}
             selectedMemory={selectedMemory}/>
 
             <DetailMemory 
             selectedMemory={selectedMemory} 
             productInfo={productInfo} 
+            selectedSim={selectedSim}
             selectedColor={selectedColor}/>
 
-            <DetailSim productInfo={productInfo}/>
+            <DetailSim 
+            selectedMemory={selectedMemory} 
+            selectedColor={selectedColor}
+            selectedSim={selectedSim}
+            productInfo={productInfo}/>
           </div>
         </div>
       </div>

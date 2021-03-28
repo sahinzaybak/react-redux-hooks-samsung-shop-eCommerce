@@ -11,16 +11,17 @@ import {holdChoosenProductInfo} from '../actions/productStorage'
 const ProductList = ({ product, holdChoosenProductInfo }) => { 
   const [colorId, setColorId] = useState(0) 
   const [memoryId, setMemoryId] = useState(0) 
+  const [simId, setSimId] = useState(0) 
   const [isActiveColor, setActiveColor] = useState("") 
   const [isActiveMemory, setActiveMemory] = useState("") 
   const [isSpinner, setSpinner] = useState(false) 
 
   function holdChoosenInfo(){ //seçilen ürün bilgilerini (renk, gb) detay sayfamızda kullabilmek için state'e attık. 
-    holdChoosenProductInfo(colorId, memoryId)
-    localStorage.setItem("selectedProductInfo", JSON.stringify({colorId, memoryId}))
+    holdChoosenProductInfo(colorId, memoryId, simId)
+    localStorage.setItem("selectedProductInfo", JSON.stringify({colorId, memoryId, simId}))
   }
 
-  return (
+  return ( 
     <div className="col-md-4" key={product.id}>
       <div className="products-page__item">
         <img src={product.colors[colorId].image} />

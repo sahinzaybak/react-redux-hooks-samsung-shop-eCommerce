@@ -1,10 +1,11 @@
-export function basket(selectedColor, selectedMemory, productName, productId) {
+export function basket(selectedColor, selectedMemory, selectedSim, productName, productId) {
   return async dispatch => {
     dispatch({
       type: "FETCH_BASKET",
       payload: {
         productName: productName,
         color: selectedColor,
+        sim: selectedSim,
         count:1,
         memory : selectedMemory,
         productId : productId

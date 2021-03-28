@@ -10,7 +10,7 @@ const DetailHeader = (product, addBasket) => {
   function addBasket(){
     setBasketLoading(true)
     setTimeout(() => {  
-       product.basket(product.selectedColor, product.selectedMemory, product.name, product.id); //sepete ekle
+       product.basket(product.selectedColor, product.selectedMemory, product.selectedSim, product.name, product.id); //sepete ekle
        setBasketSuccess(true)
     },1200);
     setTimeout(() => {setBasketSuccess(false); setBasketLoading(false)}, 2500);

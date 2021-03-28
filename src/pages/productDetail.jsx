@@ -14,8 +14,8 @@ class productDetail extends PureComponent {
     let isSelectedProductInfo = JSON.parse(localStorage.getItem("selectedProductInfo"))
 
     //Herhangi bir ürün detay(gb, renk) seçilmediğinde default geleecek bilgiler.
-    if(isSelectedProductInfo == null) this.props.holdChoosenProductInfo(0,0) 
-    else this.props.holdChoosenProductInfo(isSelectedProductInfo.colorId, isSelectedProductInfo.memoryId)
+    if(isSelectedProductInfo == null) this.props.holdChoosenProductInfo(0,0,0) 
+    else this.props.holdChoosenProductInfo(isSelectedProductInfo.colorId, isSelectedProductInfo.memoryId, isSelectedProductInfo.simId)
   }
 
   render() {
