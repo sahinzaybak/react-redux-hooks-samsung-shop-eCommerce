@@ -11,7 +11,7 @@ const DetailColor = product => {
     let colorId = productColorId;
     let simId = product.selectedSim.id;
     product.holdChoosenProductInfo(colorId, memoryId, simId) 
-    localStorage.setItem("selectedProductInfo", JSON.stringify({colorId, memoryId}))
+    localStorage.setItem("selectedProductInfo", JSON.stringify({colorId, memoryId, simId}))
   }
   return (
     <div className="product-detail__color mt-5">

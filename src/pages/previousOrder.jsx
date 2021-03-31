@@ -45,15 +45,17 @@ class previousOrder extends PureComponent {
             </div>
           </div>      
         }
-
         {this.props.previousOrderList.length != 0 && 
           <div className="basket">
           <h4 class="basket-title">Önceki Siparişlerim ({this.props.previousOrderList.length} Ürün)</h4>
           <div className="row">
             <div className="col-md-8">
-              {this.props.previousOrderList.map((prevOrderList) => (
-                <PreviousOrder prevOrder={prevOrderList}/>
-              ))}
+              <div className="d-flex flex-column-reverse">
+                {this.props.previousOrderList.map((prevOrderList) => (
+                  <PreviousOrder prevOrder={prevOrderList}/>
+                ))}
+              </div>
+            
             </div>
           </div>
         </div>    

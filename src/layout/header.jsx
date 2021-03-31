@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect} from "react-redux";
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 import { store } from 'react-notifications-component';
 import { Modal } from 'antd';
 import { ExclamationCircleOutlined, DeleteOutlined } from '@ant-design/icons';
@@ -71,12 +71,12 @@ const Header = (product) => {
   return (
     <div className="header d-flex">
       <div className="header-img">
-        <img src={headerImage} alt="" />
+        <img src={headerImage} loading="lazy" alt="" />
       </div>
       <div className="header-basket">
         <Link to="/basket/prev" className="header-basket__item">
-          {previousOrder == null && (<p className="header-basket__text">Önceki Siparişlerim(0)</p>)}
-          {previousOrder != null && (<p className="header-basket__text">Önceki Siparişlerim({previousOrder.length})</p>)}
+          {previousOrder == null && (<p className="header-basket__text">Önceki Siparişlerim (0)</p>)}
+          {previousOrder != null && (<p className="header-basket__text">Önceki Siparişlerim ({previousOrder.length})</p>)}
         </Link>
         
         <Link to="/basket/list" className="header-basket__item">
@@ -122,7 +122,6 @@ const mapStateToProps = (state) => {
   return {
     basketList: state.basket.basketList,
     previousOrderList: state.previousOrder.previousOrderList
-    
   };
 };
 

@@ -79,8 +79,8 @@ class payment extends PureComponent {
           date: date,
           price: price + " " + "TL"});
       }
+    }
   }
-}
 
   selectHireCount = (count) => { //taksit seçeneği (2,3,4)
     tableHirePriceTotal = [...this.state.dataSource];
@@ -175,17 +175,14 @@ class payment extends PureComponent {
          <Form name="nest-messages" validateMessages={validateMessages} onFinish={this.completePayment.bind(this)}>
          <div className="row">
            <div className="col-md-8">
-         
             <div className="d-flex justify-content-between">
               <Form.Item name="name" label="Ad-Soyad" rules={[{required: true}]}>
                 <Input placeholder="Ad-Soyad" />
               </Form.Item>
-
               <Form.Item name="number" label="Telefon No" rules={[{required: true,type: "number"}]}>
                 <InputNumber placeholder="Telefon No" />
               </Form.Item>
             </div>
-
             <div className="d-flex justify-content-between">
               <Form.Item name="email"label="E-posta Adresi" rules={[{required: true,type: "email"}]}>
                 <Input placeholder="E-posta Adresi"/>
@@ -200,12 +197,10 @@ class payment extends PureComponent {
                 </Select>
               </Form.Item>
             </div>
-
             <div className="d-flex justify-content-between">
               <Form.Item name="iban" label="IBAN Numaranız" rules={[{required: true,type: "number"}]}>
                 <InputNumber placeholder="IBAN Numaranız" />
               </Form.Item>
-
               <Form.Item name="paymentMethod" label="Ödeme Şekliniz" rules={[{required: true}]}>
               <Radio.Group onChange={this.changePaymentMethod}>
                 <Radio value="hire">Taksit</Radio>
@@ -213,7 +208,6 @@ class payment extends PureComponent {
               </Radio.Group>
               </Form.Item>
             </div>
-
             {this.state.choosePaymentmethod == "hire" &&
               <Form.Item className="w-100" name="hire" label="Taksit">
                 <Select value={this.state.hire} defaultValue="2" name="hire" placeholder="Kaç Taksit Yapmak İstiyorsunuz?" allowClear 
@@ -228,7 +222,6 @@ class payment extends PureComponent {
               <Table dataSource={tableHirePriceTotal} columns={columns} />
             }
           </div>
-
            <div className="col-md-4">
             <div className="basket-summary">
               <h5 className="basket-title mb-3">Sipariş Özeti</h5>

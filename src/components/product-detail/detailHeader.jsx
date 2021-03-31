@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 import {basket} from '../../actions/basket'
 
 const DetailHeader = (product, addBasket) => {
-  const [basketLoading , setBasketLoading] = useState(false)
-  const [basketSuccess , setBasketSuccess] = useState(false)
+  const [basketLoading, setBasketLoading] = useState(false)
+  const [basketSuccess, setBasketSuccess] = useState(false)
   function addBasket(){
     setBasketLoading(true)
     setTimeout(() => {  

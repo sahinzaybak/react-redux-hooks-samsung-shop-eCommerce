@@ -1,5 +1,7 @@
 import React, {  Component } from 'react'
 import { store } from 'react-notifications-component';
+import {InfoCircleOutlined} from '@ant-design/icons';
+import { Tooltip } from 'antd';
 import { connect } from "react-redux";
 
 //Action
@@ -63,13 +65,15 @@ class CouponCode extends Component {
   render(){
     return (
       <div className={`${localStorage.getItem('couponCode') ? "disabled" : ""}`}>
-        <h5 class="basket-title mb-3">İndirim Kodu</h5>
+        <div className="d-flex align-items-center mb-3">
+          <h5 class="basket-title mb-0 mr-2">İndirim Kodu</h5>
+          <Tooltip title="100 TL indirim kazanırsınız."><InfoCircleOutlined/></Tooltip>
+        </div>
         <div className="d-flex justify-content-between">
-          <input type="text" placeholder="İndirim Kodu Giriniz" name="couponCode" 
-          onChange={this.handleTextChanged} 
+          <input type="text" placeholder="İndirim Kodu Giriniz" name="couponCode" onChange={this.handleTextChanged} 
           value={this.state.couponCode} />
-        <a className="button" onClick={(e) => this.checkCode(e.target.value)}>Onayla</a>
-      </div>
+          <a className="button" onClick={(e) => this.checkCode(e.target.value)}>Onayla</a>
+        </div>
     </div>
     );
   }

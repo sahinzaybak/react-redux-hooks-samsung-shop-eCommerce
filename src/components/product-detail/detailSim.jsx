@@ -31,12 +31,12 @@ const DetailSim = (product) => {
         <div className="d-flex align-items-center flex-wrap mt-4">
           {product.productInfo.length != 0 && product.productInfo.sim.map(productSim =>
             <div className={`product-detail__color-item mb-3 p-2 pb-3 
-            ${product.selectedSim.id == productSim.id ? "active" : ""}`}  key={productSim.id} onClick={() => {
-              setSpinnerSim(true)
-              setTimeout(() => {changeSim(productSim.id)}, 0);
-              setTimeout(() => {setSelectedSim(productSim.id)}, 0);
-              setTimeout(() => {setSpinnerSim(false)}, 700);
-            }}>
+              ${product.selectedSim.id == productSim.id ? "active" : ""}`}  key={productSim.id} onClick={() => {
+                setSpinnerSim(true)
+                setTimeout(() => {changeSim(productSim.id)}, 0);
+                setTimeout(() => {setSelectedSim(productSim.id)}, 0);
+                setTimeout(() => {setSpinnerSim(false)}, 700);
+              }}>
               <p className="product-detail__color-other">{productSim.name} SIM</p>
             </div>
             )}

@@ -42,7 +42,6 @@ const previousOrderList = ({ prevOrder }) => {
           <p class="previous-wrp__coupon"> Kupon Kodu Tanımlanmış.</p>
         }
       </div>
-      
       <div className="basket-item">
         {prevOrder.orderList.map((orderList) => (  
           <div className="basket-item__wrp">
@@ -109,5 +108,4 @@ const previousOrderList = ({ prevOrder }) => {
   );
 }
   
-
 export default previousOrderList
