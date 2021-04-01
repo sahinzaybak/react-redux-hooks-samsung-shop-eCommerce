@@ -44,11 +44,12 @@ const ProductDetailInfo = ({productInfo, productStorage}) => {
       <div className="row h-100">
         <div className="col-md-6">
           <div className="product-detail__slider h-100">
-            <ImageGallery items={productImages} showPlayButton={false} />
+            <ImageGallery lazyLoad="true" items={productImages} showPlayButton={false} />
           </div>
         </div>
         <div className="col-md-6">
           <div className="product-detail__info h-100">
+            
             <DetailDesc productInfo={productInfo} />
 
             <DetailColor 

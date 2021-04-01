@@ -1,11 +1,14 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
+
+
 //Actions
 import {getProductDetail} from '../actions/products'
 import {holdChoosenProductInfo} from '../actions/productStorage'
 
 //Components
 import ProductInfo from '../components/productDetailInfo'
+import ProductDetailLoader from '../components/content-loader/product-detail-loader'
 
 class productDetail extends PureComponent {
   componentDidMount() {
@@ -21,7 +24,8 @@ class productDetail extends PureComponent {
   render() {
     return (
       <div className="product-detail">
-        <ProductInfo productInfo={this.props.productDetail} />
+        {this.props.productDetail.length != 0 && <ProductInfo productInfo={this.props.productDetail} /> }
+        {this.props.productDetail.length == 0 && <ProductDetailLoader />}
       </div>
     );
   }

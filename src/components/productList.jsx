@@ -4,11 +4,13 @@ import {Link} from 'react-router-dom';
 import PropTypes from "prop-types";
 import { Tooltip } from 'antd';
 
+
 //Actions
 import {holdChoosenProductInfo} from '../actions/productStorage'
 
 //Function componenet servis return dispatch sorunu mapDispatchToProps değerini bu kısmı da yazmamız gerekli.
 const ProductList = ({ product, holdChoosenProductInfo }) => { 
+  debugger;
   const [colorId, setColorId] = useState(0) 
   const [memoryId, setMemoryId] = useState(0) 
   const [simId, setSimId] = useState(0) 

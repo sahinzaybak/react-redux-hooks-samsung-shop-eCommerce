@@ -5,6 +5,7 @@ import { connect } from "react-redux"; //redux ile bağlantı kurmak için conne
 //Components
 import ProductFilter from "../components/productFilter.jsx";
 import ProductList from "../components/productList.jsx";
+import ProductListLoader from '../components/content-loader/product-list-loader'
 
 //Actions
 import { getProductList } from "../actions/products";
@@ -16,6 +17,7 @@ class products extends PureComponent {
 
   componentDidMount() {
     this.props.getProductList();
+    console.log(this.props.products.length == 0)
   }
 
   render() {
@@ -30,10 +32,9 @@ class products extends PureComponent {
           <div className="col-md-9">
             <div className="products-page__list mt-4">
               <div className="row">
-                {this.props.products.map((productInfo) => (
-                  <ProductList product={productInfo} key={productInfo.id}/>
-                ))}
+                {this.props.products.map((productInfo) => (<ProductList product={productInfo} key={productInfo.id}/>))}
               </div>
+              {this.props.products.length == 0  && <ProductListLoader />}
             </div>
           </div>
         </div>
