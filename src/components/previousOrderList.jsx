@@ -39,7 +39,7 @@ const previousOrderList = ({ prevOrder }) => {
           <CheckCircleTwoTone twoToneColor="#52c41a" />Sipariş Tarihi: {prevOrder.orderDate}
         </h6>
         {prevOrder.isCouponCode == "true" && 
-          <p class="previous-wrp__coupon"> Kupon Kodu Tanımlanmış.</p>
+          <p class="previous-wrp__coupon"> İndirim Kodu Tanımlanmış ( -100 TL )</p>
         }
       </div>
       <div className="basket-item">
@@ -61,7 +61,7 @@ const previousOrderList = ({ prevOrder }) => {
               </div>
               <div className="basket-item__price">
                 <div className="text-center">
-                  <p className="mb-1">Toplam Fiyat</p>
+                  <p className="mb-1">Toplam Ürün Fiyatı</p>
                   <h4>{orderList.memory.price} TL</h4>
                 </div>
               </div>
@@ -84,22 +84,22 @@ const previousOrderList = ({ prevOrder }) => {
                 </div>
               }
               {prevOrder.paymentMethod == "hire" && 
-              <div className="d-flex">
-                <div className="text-center mr-5">
-                  <Tooltip title="Kargo Dahil (+9,99 TL)">
-                    <p className="mb-1">Toplam Ödeme Tutarı</p>
-                    <h4>{prevOrder.totalPrice} TL</h4>
-                  </Tooltip>
+                <div className="d-flex">
+                  <div className="text-center mr-5">
+                    <Tooltip title="Kargo Dahil (+9,99 TL)">
+                      <p className="mb-1">Toplam Ödeme Tutarı</p>
+                      <h4>{prevOrder.totalPrice} TL</h4>
+                    </Tooltip>
+                  </div>
+                  <div className="text-center mr-5 pr-2">
+                    <p className="mb-1">İlk Taksit ({prevOrder.orderPrice.length}/1)</p>
+                    <h4>{prevOrder.orderPrice[0].price}</h4>
+                  </div>
+                  <div className="text-center">
+                    <p className="mb-1">Son Ödeme T.</p>
+                    <h4>{prevOrder.orderPrice[0].date}</h4>
+                  </div>
                 </div>
-                <div className="text-center mr-5 pr-2">
-                  <p className="mb-1">İlk Taksit ({prevOrder.orderPrice.length}/1)</p>
-                  <h4>{prevOrder.orderPrice[0].price}</h4>
-                </div>
-                <div className="text-center">
-                  <p className="mb-1">Son Ödeme T.</p>
-                  <h4>{prevOrder.orderPrice[0].date}</h4>
-                </div>
-              </div>
               }
           </div>
         </div>

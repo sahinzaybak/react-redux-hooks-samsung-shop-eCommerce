@@ -3,31 +3,38 @@ import ContentLoader from 'react-content-loader'
 class productDetailLoader extends Component {
   render() {
     return (
-      <ContentLoader viewBox="0 0 800 400">
-        <rect x="430" y="154" rx="5" ry="5" width="220" height="10" />
-        <rect x="430" y="184" rx="5" ry="5" width="220" height="10" />
-        <rect x="430" y="214" rx="5" ry="5" width="220" height="10" />
-        <rect x="430" y="244" rx="5" ry="5" width="220" height="10" />
-        <rect x="64" y="18" rx="0" ry="0" width="345" height="300" />
-        <rect x="229" y="300" rx="0" ry="0" width="0" height="0" />
-        <rect x="111" y="340" rx="0" ry="0" width="0" height="0" />
-        <rect x="121" y="342" rx="0" ry="0" width="0" height="0" />
-        <rect x="10" y="20" rx="0" ry="0" width="40" height="44" />
-        <rect x="10" y="80" rx="0" ry="0" width="40" height="44" />
-        <rect x="10" y="140" rx="0" ry="0" width="40" height="44" />
-        <rect x="194" y="329" rx="0" ry="0" width="0" height="0" />
-        <rect x="192" y="323" rx="0" ry="0" width="0" height="0" />
-        <rect x="185" y="323" rx="0" ry="0" width="0" height="0" />
-        <rect x="10" y="200" rx="0" ry="0" width="40" height="44" />
-        <rect x="430" y="18" rx="0" ry="0" width="300" height="25" />
-        <rect x="430" y="58" rx="0" ry="0" width="300" height="6" />
-        <rect x="430" y="68" rx="0" ry="0" width="300" height="6" />
-        <rect x="430" y="78" rx="0" ry="0" width="300" height="6" />
-        <rect x="798" y="135" rx="0" ry="0" width="0" height="0" />
-        <rect x="731" y="132" rx="0" ry="0" width="0" height="0" />
-        <rect x="430" y="99" rx="0" ry="0" width="70" height="30" />
-        <rect x="560" y="99" rx="0" ry="0" width="70" height="30" />
-      </ContentLoader>
+      <div className="row">
+        <div className="col-12 col-md-6">
+          <ContentLoader speed={2} viewBox="0 0 800 800">
+            <rect x="0" y="18" rx="0" ry="0" width="100%" height="600" />
+            <rect x="10" y="640" rx="0" ry="0" width="80" height="80" />
+            <rect x="110" y="640" rx="0" ry="0" width="80" height="80" />
+            <rect x="210" y="640" rx="0" ry="0" width="80" height="80" />
+            <rect x="310" y="640" rx="0" ry="0" width="80" height="80" />
+            <rect x="410" y="640" rx="0" ry="0" width="80" height="80" />
+            <rect x="510" y="640" rx="0" ry="0" width="80" height="80" />
+            <rect x="610" y="640" rx="0" ry="0" width="80" height="80" />
+            <rect x="710" y="640" rx="0" ry="0" width="80" height="80" />
+          </ContentLoader>
+        </div>
+        <div className="col-12 col-md-6">
+          <ContentLoader speed={2} viewBox="0 0 800 800">
+            <rect x="0" y="18" rx="0" ry="0" width="50%" height="20" />
+            <rect x="0" y="58" rx="0" ry="0" width="50%" height="20" />
+            <rect x="0" y="68" rx="0" ry="0" width="50%" height="20" />
+            <rect x="0" y="110" rx="0" ry="0" width="50%" height="20" />
+            <rect x="0" y="170" rx="0" ry="0" width="50%" height="26" />
+            <rect x="0" y="180" rx="0" ry="0" width="50%" height="25" />
+            <rect x="0" y="240" rx="0" ry="0" width="80%" height="26" />
+            <rect x="0" y="330" rx="0" ry="0" width="50%" height="30" />
+            <rect x="0" y="380" rx="0" ry="0" width="50%" height="30" />
+            <rect x="0" y="455" rx="5" ry="5" width="50%" height="50" />
+            <rect x="0" y="530" rx="5" ry="5" width="80%" height="50" />
+            <rect x="0" y="610" rx="5" ry="5" width="80%" height="50" />
+            <rect x="0" y="680" rx="5" ry="5" width="80%" height="50" />
+          </ContentLoader>
+        </div>
+      </div>
     );
   }
 }

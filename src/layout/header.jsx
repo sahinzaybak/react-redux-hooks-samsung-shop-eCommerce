@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { connect} from "react-redux";
-import {Link, NavLink} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { store } from 'react-notifications-component';
 import { Modal } from 'antd';
 import { ExclamationCircleOutlined, DeleteOutlined } from '@ant-design/icons';
-
+import { useHistory } from "react-router";
 import "../assets/scss/layout/header.scss";
 import headerImage from "../assets/images/header.png";
 import basketImg from "../assets/images/shopping-cart.svg";
@@ -16,6 +16,8 @@ import {previousOrder,previousOrderStorage} from '../actions/previousOrder'
 
 const { confirm } = Modal;
 const Header = (product) => {
+  const history = useHistory();
+  const [basketHover, setBasketHover] = useState(false)
   if(product.basketList.length != 0)
     localStorage.setItem("basket", JSON.stringify(product.basketList)); //state basketList yenilendiğinde localStorage'de yenilenir.
 
@@ -25,14 +27,25 @@ const Header = (product) => {
   let basket = JSON.parse(localStorage.getItem("basket"));
   let previousOrder = JSON.parse(localStorage.getItem("myPrevOrderList"));
 
-   //sayfa yenilendiğinde local storage'deki bilgileri state'teki ilgili dizilere doldur.  --> [] sadece bir kere..
-  useEffect(() => {
-    if(basket != null)
-      product.basketStorage();
-
-    if(previousOrder != null)
-      product.previousOrderStorage();
-  },[]);
+  function orderComplete(){
+    confirm({
+      title: 'Siparişi tamamlamak istediğinizden emin misiniz?',
+      icon: <ExclamationCircleOutlined />,
+      centered:true,
+      okText: 'Evet',
+      okType: 'success',
+      cancelText: 'Hayır',
+      confirmLoading:true,
+      onOk() {
+        return new Promise((resolve, reject) => {
+          setTimeout(Math.random() > 1000 ? resolve  : reject, 1000);
+          setTimeout(() => {
+            history.push("/basket/payment")
+          }, 1000);
+        }).catch(() =>false);
+      },
+    });
+  }
 
   function deleteItem(basketProductId){
     confirm({
@@ -68,22 +81,37 @@ const Header = (product) => {
       },
     });
   }
+
+  //sayfa yenilendiğinde local storage'deki bilgileri state'teki ilgili dizilere doldur.  --> [] sadece bir kere..
+  useEffect(() => {
+  if(basket != null)
+    product.basketStorage();
+
+  if(previousOrder != null)
+    product.previousOrderStorage();
+  },[]);
+
   return (
     <div className="header d-flex">
       <div className="header-img">
         <img src={headerImage} loading="lazy" alt="" />
       </div>
-      <div className="header-basket">
+      <div className={`header-basket ${basketHover ? "activeBasket" : ""}`}>
         <Link to="/basket/prev" className="header-basket__item">
-          {previousOrder == null && (<p className="header-basket__text">Önceki Siparişlerim (0)</p>)}
-          {previousOrder != null && (<p className="header-basket__text">Önceki Siparişlerim ({previousOrder.length})</p>)}
+          {previousOrder == null ? 
+            (<p className="header-basket__text">Önceki Siparişlerim (0)</p>) :
+            (<p className="header-basket__text">Önceki Siparişlerim ({previousOrder.length}) </p>)
+          }
         </Link>
         
-        <Link to="/basket/list" className="header-basket__item">
+        <Link to="/basket/list" className="header-basket__item" onMouseEnter={() => {setBasketHover(true)}}
+       onMouseLeave={() => {setBasketHover(false)}} >
           <p className="header-basket__text">Sepetim</p>
           <img className="ml-2" src={basketImg} alt="" />
-          {basket == null && (<span className="header-basket__count ml-1">0</span>)}
-          {basket != null && (<span className="header-basket__count ml-1">{basket.length}</span>)}
+          {basket == null ? 
+            (<span className="header-basket__count ml-1">0</span>) :
+            (<span className="header-basket__count ml-1">{basket.length}</span>)
+          }
         </Link>
     
         {basket != null && 
@@ -108,8 +136,8 @@ const Header = (product) => {
                 </div>
               ))}
               <div className="d-flex justify-content-around">
-                <a className="button pr-4 pl-4 p-1 small white">Sepeti Gör</a>
-                <a className="button pr-4 pl-4 p-1 small green">Siparişi Tamamla</a>
+                <Link to="/basket/list" className="button pr-4 pl-4 p-1 small white">Sepeti Gör</Link>
+                <a className="button pr-4 pl-4 p-1 small green" onClick={orderComplete.bind(this)}>Siparişi Tamamla</a>
               </div>
             </div>
           }

@@ -1,6 +1,7 @@
 const initialState = {
   productList:[],
   productDetail:[],
+  isFilter:false,
   isLoading:''
 }
 
@@ -14,12 +15,13 @@ export default (state = initialState, action) => {
     case "FETCH_PRODUCT_FILTER_LIST":
       return{
         ...state,
-        productList: action.payload
+        productList: action.payload,
+        isFilter: true
       }
     case "FETCH_PRODUCT_DETAIL":
       return{
         ...state,
-        productDetail: action.payload
+        productDetail: action.payload,
       }
     case "LOADING":
       return{

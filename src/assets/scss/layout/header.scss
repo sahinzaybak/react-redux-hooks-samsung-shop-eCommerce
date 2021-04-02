@@ -1,6 +1,6 @@
 .header{
   height: 76px;
-  border-bottom: 1px solid #ececec;
+  // border-bottom: 1px solid #ececec;
   &-basket{
     position: relative;
     height: 100%;
@@ -9,23 +9,12 @@
     align-items: center;
     justify-content: flex-end;
     background-color: white;
-  
-    
- 
     &__item{
       display: flex;
       align-items: center;
       margin-right: 6.9%;
       img{
         width: 32px;
-      }
-      &:nth-child(2){
-        &:hover{
-          ~ .header-basket__products{
-            pointer-events:all;
-            opacity: 1;
-          }
-        }
       }
     }
     &__text{
@@ -50,7 +39,7 @@
     &__products{
       position: absolute;
       z-index: 99;
-      top: 73px;
+      top: 55px;
       width: 300px;
       background-color: white;
       border: 1px solid #d6d9e0;
@@ -90,5 +79,12 @@
         opacity: 1;
       }
     }
+    &.activeBasket{
+      .header-basket__products{
+        opacity: 1;
+        pointer-events: all;
+      }
+    }
   }
+
 }

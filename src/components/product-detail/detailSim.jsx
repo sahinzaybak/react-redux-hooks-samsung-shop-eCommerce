@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import {holdChoosenProductInfo} from '../../actions/productStorage'
 
 const DetailSim = (product) => {
-  debugger;
   const [selectedSim, setSelectedSim] = useState(0)
   const [isSpinnerSim, setSpinnerSim] = useState(false) 
 

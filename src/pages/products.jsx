@@ -17,7 +17,6 @@ class products extends PureComponent {
 
   componentDidMount() {
     this.props.getProductList();
-    console.log(this.props.products.length == 0)
   }
 
   render() {
@@ -31,10 +30,13 @@ class products extends PureComponent {
           </div>
           <div className="col-md-9">
             <div className="products-page__list mt-4">
-              <div className="row">
-                {this.props.products.map((productInfo) => (<ProductList product={productInfo} key={productInfo.id}/>))}
-              </div>
-              {this.props.products.length == 0  && <ProductListLoader />}
+              {this.props.products.length != 0  &&
+                <div className="row">
+                  {this.props.products.map((productInfo) => (<ProductList product={productInfo} key={productInfo.id}/>))}
+                </div>
+              } 
+              {this.props.products.length == 0 && !this.props.isFilter && <ProductListLoader />}
+              {this.props.products.length == 0 && this.props.isFilter && <h2>Aradığınız kriterlere uygun ürün bulunamadı.</h2>}
             </div>
           </div>
         </div>
@@ -46,6 +48,7 @@ class products extends PureComponent {
 const mapStateToProps = (state) => {
   return {
     products: state.products.productList,
+    isFilter: state.products.isFilter,
   };
 };
 
