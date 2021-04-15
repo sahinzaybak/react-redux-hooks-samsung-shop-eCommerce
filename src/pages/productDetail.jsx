@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-
+import '../assets/scss/product-detail.scss'
 
 //Actions
-import {getProductDetail} from '../actions/products'
+import {getProductDetail,productDetailClear} from '../actions/products'
 import {holdChoosenProductInfo} from '../actions/productStorage'
 
 //Components
@@ -16,9 +16,13 @@ class productDetail extends PureComponent {
     this.props.getProductDetail(slug)
     let isSelectedProductInfo = JSON.parse(localStorage.getItem("selectedProductInfo"))
 
-    //Herhangi bir ürün detay(gb, renk) seçilmediğinde default geleecek bilgiler.
+    //Herhangi bir ürün detay(gb, renk) seçilmediğinde default gelecek bilgiler.
     if(isSelectedProductInfo == null) this.props.holdChoosenProductInfo(0,0,0) 
     else this.props.holdChoosenProductInfo(isSelectedProductInfo.colorId, isSelectedProductInfo.memoryId, isSelectedProductInfo.simId)
+  }
+
+  componentWillUnmount(){ //sayfadan çıkıldığı zaman product list'i temizle.
+    this.props.productDetailClear()
   }
 
   render() {
@@ -39,7 +43,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   getProductDetail,
-  holdChoosenProductInfo
+  holdChoosenProductInfo,
+  productDetailClear
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(productDetail);

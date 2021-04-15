@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import '../assets/scss/payment.scss'
 import { Form, Input, InputNumber, Select, Table, Radio, Modal} from "antd";
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { connect } from "react-redux";
@@ -171,11 +172,11 @@ class payment extends PureComponent {
   render() {
     return (
       <div className="payment basket-page">
-         <h4 class="basket-title">Ödeme Yap</h4>
+         <h4 className="basket-title">Ödeme Yap</h4>
          <Form name="nest-messages" validateMessages={validateMessages} onFinish={this.completePayment.bind(this)}>
          <div className="row">
            <div className="col-md-8">
-            <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content-between flex-column flex-md-row">
               <Form.Item name="name" label="Ad-Soyad" rules={[{required: true}]}>
                 <Input placeholder="Ad-Soyad" />
               </Form.Item>
@@ -183,7 +184,7 @@ class payment extends PureComponent {
                 <InputNumber placeholder="Telefon No" />
               </Form.Item>
             </div>
-            <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content-between flex-column flex-md-row">
               <Form.Item name="email"label="E-posta Adresi" rules={[{required: true,type: "email"}]}>
                 <Input placeholder="E-posta Adresi"/>
               </Form.Item>
@@ -197,7 +198,7 @@ class payment extends PureComponent {
                 </Select>
               </Form.Item>
             </div>
-            <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content-between flex-column flex-md-row">
               <Form.Item name="iban" label="IBAN Numaranız" rules={[{required: true,type: "number"}]}>
                 <InputNumber placeholder="IBAN Numaranız" />
               </Form.Item>
@@ -246,6 +247,5 @@ const mapDispatchToProps = {
   basketClear,
   previousOrder
 };
-
 
 export default connect(mapStateToProps,mapDispatchToProps)(payment);

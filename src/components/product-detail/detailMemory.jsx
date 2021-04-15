@@ -30,7 +30,7 @@ const DetailMemory = (product) => {
           {product.productInfo.length != 0 && product.productInfo.memory.map(productMemory =>
             <div className={`product-detail__color-item mb-3 p-2 pb-3 ${product.selectedMemory.id == productMemory.id ? "active" : ""}`} 
               key={productMemory.id} onClick={() => {
-              dispatch({ type: 'LOADING' , payload: true })
+              dispatch({ type: 'LOADING' , payload: true });
               setTimeout(() => {changeMemory(productMemory.id)}, 0);
               setTimeout(() => {dispatch({ type: 'LOADING' , payload: false })}, 700);
             }}>

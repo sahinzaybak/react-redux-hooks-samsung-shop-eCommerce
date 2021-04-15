@@ -16,8 +16,8 @@ const DetailHeader = (product, addBasket) => {
     setTimeout(() => {setBasketSuccess(false); setBasketLoading(false)}, 2500);
   }
   return (
-    <div className="product-detail__header sticky-top">
-    <h3>{product.name}</h3>
+    <div className="product-detail__header sticky-top flex-column flex-md-row">
+    <h3 className="mb-4 mb-md-0">{product.name}</h3>
       <div className="d-flex align-items-center justify-content-center">
         <div className={`spinner mr-5 pr-2 ${!product.loading ? "d-none" : ""}`} >
           <div className="spinner-border text-primary" role="status"></div>
@@ -30,8 +30,8 @@ const DetailHeader = (product, addBasket) => {
             </div>
             <p>Sepete Ekleniyor</p>
           </div>
-          <p class="basket-add-text">Ürünü Sepete Ekle</p>
-          <p class="basket-add-success">Sepete Eklendi</p>
+          <p className="basket-add-text">Ürünü Sepete Ekle</p>
+          <p className="basket-add-success">Sepete Eklendi</p>
           </div>
       </div>
   </div>

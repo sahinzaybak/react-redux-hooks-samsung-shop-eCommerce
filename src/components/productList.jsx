@@ -23,8 +23,8 @@ const ProductList = ({ product, holdChoosenProductInfo }) => {
   }
 
   return ( 
-    <div className="col-md-4" key={product.id}>
-      <div className="products-page__item">
+    <div className="col-lg-6 col-xl-4" key={product.id}>
+      <div className="products-page__item mb-4">
         <img src={product.colors[colorId].image} />
         <div className="d-flex justify-content-center mt-3">
           {product.colors.map((rgb,index) => 

@@ -27,6 +27,15 @@ const ProductDetailInfo = ({productInfo, productStorage}) => {
           setSelectedColorImage(element[productStorage.colorId])
       });
     }  
+    else{
+      setSelectedMemory(productInfo.memory.find(memory => memory.id === 0)) // default hafıza
+      setSelectedColor(productInfo.colors.find(color => color.id == 0)) // default renk
+      setSelectedSim(productInfo.sim.find(sim => sim.id == 0)) // default sim
+      productInfo.colorsImage.forEach(element => {
+        if(Object.keys(element).find(colorImageKey => colorImageKey == 0))
+          setSelectedColorImage(element[0])
+      });
+    }
   })
   
   //Slider
@@ -44,7 +53,7 @@ const ProductDetailInfo = ({productInfo, productStorage}) => {
       <div className="row h-100">
         <div className="col-md-6">
           <div className="product-detail__slider h-100">
-            <ImageGallery lazyLoad="true" items={productImages} showPlayButton={false} />
+            <ImageGallery lazyLoad={true} items={productImages} showPlayButton={false} />
           </div>
         </div>
         <div className="col-md-6">

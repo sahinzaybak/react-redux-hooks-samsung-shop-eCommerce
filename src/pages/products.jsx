@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import propTypes from "prop-types";
 import { connect } from "react-redux"; //redux ile bağlantı kurmak için connect gerekli.
+import '../assets/scss/products-page.scss'
 
 //Components
 import ProductFilter from "../components/productFilter.jsx";

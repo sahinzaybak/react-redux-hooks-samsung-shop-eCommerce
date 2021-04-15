@@ -33,8 +33,8 @@ class previousOrder extends PureComponent {
     return (
       <div className="basket-page previous">
         {this.props.previousOrderList.length == 0 && 
-          <div className="d-flex justify-content-between align-items-center no-product">
-            <div className="d-flex">
+          <div className="d-flex justify-content-between align-items-center no-product flex-column flex-md-row mt-4 mt-md-0">
+            <div className="d-flex mb-4 mb-md-0">
               <img className="mr-4" src={basketImg} alt="" />
               <h5>Önceden yaptığınız alışverişiniz bulunmamaktadır.</h5>
             </div>
@@ -47,7 +47,7 @@ class previousOrder extends PureComponent {
         }
         {this.props.previousOrderList.length != 0 && 
           <div className="basket">
-          <h4 class="basket-title">Önceki Siparişlerim ({this.props.previousOrderList.length} Ürün)</h4>
+          <h4 class="basket-title mt-4 mt-md-0">Önceki Siparişlerim ({this.props.previousOrderList.length} Ürün)</h4>
           <div className="row">
             <div className="col-md-8">
               <div className="d-flex flex-column-reverse">

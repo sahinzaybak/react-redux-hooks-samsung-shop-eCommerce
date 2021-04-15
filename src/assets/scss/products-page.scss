@@ -1,16 +1,30 @@
 .products-page {
 	background-color: whitesmoke;
 	height: 100vh;
+	@media(max-width: 920px) {
+		height: 100%;
+	}
+	
 
 	&__filter {
 		background-color: white;
 		height: 100vh;
 		padding: 10px 0;
+		@media(max-width: 768px) {
+			display: none;
+		}
 	}
 
 	&__list {
 		width: 97.4%;
 		height: 100vh;
+		@media(max-width: 768px) {
+			width: 90%;
+			margin: 0 auto;
+		}
+		@media(max-width: 920px) {
+			height: 100%;
+		}
 	}
 
 	&__item {
@@ -18,7 +32,6 @@
 		border-radius: 20px;
 		text-align: center;
 		padding: 33px 33px 46px;
-
 		img {
 			width: 75%;
 		}

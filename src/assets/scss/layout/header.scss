@@ -1,6 +1,8 @@
 .header{
   height: 76px;
-  // border-bottom: 1px solid #ececec;
+  @media(max-width: 600px) {
+    border-bottom: 1px solid #e2e2e2;
+	}
   &-basket{
     position: relative;
     height: 100%;
@@ -35,6 +37,7 @@
       align-items: center;
       text-align: center;
       justify-content: center;
+      flex-shrink: 0;
     }
     &__products{
       position: absolute;
@@ -50,6 +53,12 @@
       transition: all .3s;
       pointer-events: none;
       opacity: 0;
+      max-height: 675px;
+      overflow: scroll;
+
+      @media(max-width: 768px) {
+        display: none;
+      }
       img{
         max-width: 60px;
       }
@@ -86,5 +95,4 @@
       }
     }
   }
-
 }

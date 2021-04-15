@@ -66,7 +66,7 @@ class CouponCode extends Component {
     return (
       <div className={`${localStorage.getItem('couponCode') ? "disabled" : ""}`}>
         <div className="d-flex align-items-center mb-3">
-          <h5 class="basket-title mb-0 mr-2">İndirim Kodu</h5>
+          <h5 className="basket-title mb-0 mr-2">İndirim Kodu</h5>
           <Tooltip title="100 TL indirim kazanırsınız."><InfoCircleOutlined/></Tooltip>
         </div>
         <div className="d-flex justify-content-between">

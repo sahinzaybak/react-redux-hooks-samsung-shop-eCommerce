@@ -6,6 +6,9 @@
 		font-size: 28px;
 		font-weight: 600;
 		letter-spacing: -0.7px;
+		@media(max-width: 900px) {
+			font-size: 20px;
+		}
 	}
 
 	&__info {
@@ -17,16 +20,20 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    // padding-bottom: 20px;
     margin-bottom: 25px;
     border-bottom: 1px solid #ececec;
     height: 70px;
     background-color: white;
 		z-index: 9 !important;
+		@media(max-width: 900px) {
+			padding: 25px 9px;
+			height: auto;
+		}
 
 		h3 {
 			font-weight: 700;
 			letter-spacing: -0.7px;
+		
 		}
 	}
 

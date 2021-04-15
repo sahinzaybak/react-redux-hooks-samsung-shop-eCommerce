@@ -40,7 +40,7 @@ const Header = (product) => {
         return new Promise((resolve, reject) => {
           setTimeout(Math.random() > 1000 ? resolve  : reject, 1000);
           setTimeout(() => {
-            history.push("/basket/payment")
+            history.push("/payment")
           }, 1000);
         }).catch(() =>false);
       },
@@ -93,19 +93,18 @@ const Header = (product) => {
 
   return (
     <div className="header d-flex">
-      <div className="header-img">
+      <div className="header-img d-none d-lg-block">
         <img src={headerImage} loading="lazy" alt="" />
       </div>
       <div className={`header-basket ${basketHover ? "activeBasket" : ""}`}>
-        <Link to="/basket/prev" className="header-basket__item">
+        <Link to="/previous-order" className="header-basket__item">
           {previousOrder == null ? 
             (<p className="header-basket__text">Önceki Siparişlerim (0)</p>) :
             (<p className="header-basket__text">Önceki Siparişlerim ({previousOrder.length}) </p>)
           }
         </Link>
         
-        <Link to="/basket/list" className="header-basket__item" onMouseEnter={() => {setBasketHover(true)}}
-       onMouseLeave={() => {setBasketHover(false)}} >
+        <Link to="/basket-list" className="header-basket__item" onMouseEnter={() => {setBasketHover(true)}} onMouseLeave={() => {setBasketHover(false)}} >
           <p className="header-basket__text">Sepetim</p>
           <img className="ml-2" src={basketImg} alt="" />
           {basket == null ? 
@@ -115,31 +114,31 @@ const Header = (product) => {
         </Link>
     
         {basket != null && 
-            <div className="header-basket__products">
-              <p className="ml-3 mb-2 mt-1">Sepetim ({basket.length})</p>
-              {basket != null && basket.map((basket,index) => ( 
-                <div className="d-flex header-basket__products-wrp" key={basket.id}>
-                  <div className="d-flex align-items-start">
-                    <img src={basket.color.image} alt=""/>
-                  </div>
-                  <div className="d-block">
-                    <h4 className="header-basket__products-name mt-1 mb-2">{basket.productName}</h4>
-                    <p className="header-basket__products-item" >Renk: {basket.color.name}</p>
-                    <p className="header-basket__products-item">Hafıza: {basket.memory.gb} GB</p>
-                    <p className="header-basket__products-item">SIM: {basket.sim.name} Kart</p>
-                    <p className="header-basket__products-price mt-1">{basket.memory.price.toFixed(3)} TL</p>
-                    <p className="header-basket__products-s mt-1">{basket.count} Adet</p>
-                  </div>
-                  <div className="ml-auto mr-2">
-                    <p onClick={() => {deleteItem(index)}}><DeleteOutlined /></p>
-                  </div>
+          <div className="header-basket__products">
+            <p className="ml-3 mb-2 mt-1">Sepetim ({basket.length})</p>
+            {basket != null && basket.map((basket,index) => ( 
+              <div className="d-flex header-basket__products-wrp" key={index}>
+                <div className="d-flex align-items-start">
+                  <img src={basket.color.image} alt=""/>
                 </div>
-              ))}
-              <div className="d-flex justify-content-around">
-                <Link to="/basket/list" className="button pr-4 pl-4 p-1 small white">Sepeti Gör</Link>
-                <a className="button pr-4 pl-4 p-1 small green" onClick={orderComplete.bind(this)}>Siparişi Tamamla</a>
+                <div className="d-block">
+                  <h4 className="header-basket__products-name mt-1 mb-2">{basket.productName}</h4>
+                  <p className="header-basket__products-item" >Renk: {basket.color.name}</p>
+                  <p className="header-basket__products-item">Hafıza: {basket.memory.gb} GB</p>
+                  <p className="header-basket__products-item">SIM: {basket.sim.name} Kart</p>
+                  <p className="header-basket__products-price mt-1">{basket.memory.price.toFixed(3)} TL</p>
+                  <p className="header-basket__products-s mt-1">{basket.count} Adet</p>
+                </div>
+                <div className="ml-auto mr-2">
+                  <p onClick={() => {deleteItem(index)}}><DeleteOutlined /></p>
+                </div>
               </div>
+            ))}
+            <div className="d-flex justify-content-around">
+              <Link to="/basket-list" className="button pr-4 pl-4 p-1 small white">Sepeti Gör</Link>
+              <a className="button pr-4 pl-4 p-1 small green" onClick={orderComplete.bind(this)}>Siparişi Tamamla</a>
             </div>
+          </div>
           }
       </div>
     </div>

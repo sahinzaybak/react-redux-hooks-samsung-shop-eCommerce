@@ -23,6 +23,11 @@ export default (state = initialState, action) => {
         ...state,
         productDetail: action.payload,
       }
+     case "FETCH_PRODUCT_DETAIL_CLEAR":
+      return{
+        ...state,
+        productDetail: action.payload,
+      }
     case "LOADING":
       return{
         ...state,

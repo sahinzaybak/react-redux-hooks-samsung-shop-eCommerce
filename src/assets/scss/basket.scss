@@ -2,11 +2,20 @@
 	padding: 22px;
 	max-width: 77%;
 	margin: 0 auto;
+	@media(max-width: 600px) {
+		padding: 0;
+		max-width: 85%;
+	}
 
 	.basket {
 		&-title {
 			letter-spacing: -0.7px;
-			margin-bottom: 30px;
+			margin-bottom: 36px;
+			border-bottom: 1px solid #f5f5f5;
+			padding-bottom: 10px;
+			@media(max-width: 600px) {
+				font-size: 17px;
+			}
 		}
 
 		&-item {
@@ -14,15 +23,20 @@
 			margin-bottom: 20px;
 			border-radius: 12px;
 			padding: 12px;
-
-			&:nth-child(2n) {
-				// background-color: #fbfbfb;
+			&__info{
+				width: 190px;
+				@media(max-width: 900px) {
+					text-align: center;
+				}
 			}
 
 			img {
 				width: 100px;
 				max-width: 100%;
 				flex-shrink: 0;
+				@media(max-width: 768px) {
+					width: 160px;
+				}
 			}
 
 			p {
@@ -126,7 +140,6 @@
 				&.disabled {
 					display: none !important;
 				}
-
 			}
 
 			&.coupon {
@@ -141,6 +154,10 @@
 				.disabled {
 					opacity: 0.4;
 					pointer-events: none;
+				}
+				span{
+					position: relative;
+					top: -5px;
 				}
 			}
 		}
