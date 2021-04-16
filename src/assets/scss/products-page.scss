@@ -1,6 +1,7 @@
 .products-page {
 	background-color: whitesmoke;
-	height: 100vh;
+	height: calc(100vh - 76px);
+	overflow: hidden;
 	@media(max-width: 920px) {
 		height: 100%;
 	}
@@ -8,7 +9,7 @@
 
 	&__filter {
 		background-color: white;
-		height: 100vh;
+		height: calc(100vh - 76px);
 		padding: 10px 0;
 		@media(max-width: 768px) {
 			display: none;

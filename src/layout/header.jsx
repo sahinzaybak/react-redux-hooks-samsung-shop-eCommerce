@@ -94,7 +94,7 @@ const Header = (product) => {
   return (
     <div className="header d-flex">
       <div className="header-img d-none d-lg-block">
-        <img src={headerImage} loading="lazy" alt="" />
+        <img src={headerImage} className="h-100" loading="lazy" alt="" />
       </div>
       <div className={`header-basket ${basketHover ? "activeBasket" : ""}`}>
         <Link to="/previous-order" className="header-basket__item">
