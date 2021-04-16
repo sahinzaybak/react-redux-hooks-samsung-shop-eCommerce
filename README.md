@@ -7,7 +7,7 @@ Baya detaylı ve güzel bir çalışma oldu aslında, projeyi geliştirirken ür
 
 API'sini kendi oluşturduğum projede mockapi.io'dan yararlandım, oluşturduğum API'lerimi oraya yükleyip, tüm CRUD işlemlerimi  buraya istek atarak hallediyorum.
 
-Uygulamayı daha da geliştirmek adına fikir vermek isteyen arkadaşlar olursa bana Linkedin aracılığıla ulaşabilirler 🙂
+Uygulamayı daha da geliştirmek adına fikir vermek isteyen arkadaşlar olursa bana Linkedin aracılığıyla ulaşabilirler 🙂
 
 Bu arada canlı linkten "İndirim Kodu" denemek isteyen arkadaşlar için indirim kodlarını aşağıya bırakıyorum.
 
