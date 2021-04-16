@@ -1,7 +1,7 @@
 # REACT - REDUX - HOOKS SAMSUNG SHOP PROJECT
 Canlı test linki: https://react-redux-hooks-samsung-shop-e-commerce-project.vercel.app/
 
-Selamlar👋. React - Redux ve Hooks kullanarak shop.samsung benzeri bir e-ticaret uygulaması geliştirdim. 
+Selamlar herkese👋  React - Redux ve Hooks kullanarak "shop.samsung" benzeri bir E-Ticaret uygulaması geliştirdim.  
 
 Baya detaylı ve güzel bir çalışma oldu aslında, projeyi geliştirirken
 
