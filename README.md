@@ -3,9 +3,11 @@ Canlı test linki: https://react-redux-hooks-samsung-shop-e-commerce-project.ver
 
 Selamlar herkese👋  React - Redux ve Hooks kullanarak "shop.samsung" benzeri bir E-Ticaret uygulaması geliştirdim.  
 
-Baya detaylı ve güzel bir çalışma oldu aslında, projeyi geliştirirken
+Baya detaylı ve güzel bir çalışma oldu aslında, projeyi geliştirirken ürün satın alma süreçlerini en ufak detayına kadar geliştirmeye çalıştım.
 
-ürün satın alma süreçlerini en ufak detayına kadar geliştirmeye çalıştım. Uygulamayı daha da geliştirmek için fikir vermek isteyen arkadaşlar olursa bana özelden yazabilir veya  yorum olarak belirtebilirler 🙂
+API'sini kendi oluşturduğum projede mockapi.io'dan yararlandım, oluşturduğum API'lerimi oraya yükleyip, tüm CRUD işlemlerimi  buraya istek atarak hallediyorum.
+
+Uygulamayı daha da geliştirmek adına fikir vermek isteyen arkadaşlar olursa bana Linkedin aracılığıla ulaşabilirler 🙂
 
 Bu arada canlı linkten "İndirim Kodu" denemek isteyen arkadaşlar için indirim kodlarını aşağıya bırakıyorum.
 
