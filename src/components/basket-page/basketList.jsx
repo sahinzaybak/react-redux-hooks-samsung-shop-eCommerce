@@ -28,6 +28,20 @@ class basketList extends PureComponent {
     setTimeout(() => {this.props.summaryLoading(false)}, 700);
   }
 
+  handleKeypress (e) {
+    const characterCode = e.key
+    const characterNumber = Number(characterCode)
+    if (characterCode === 'Backspace') {
+      if (e.currentTarget.value) {
+        return
+      } else if (characterNumber === 0) {
+        e.preventDefault()
+      }
+    } else {
+      e.preventDefault()
+    }
+  }
+
   deleteItem(basketProductId){
     const vm = this.props
     confirm({
@@ -77,7 +91,8 @@ class basketList extends PureComponent {
             <p>SIM: {this.props.basket.sim.name} Kart</p>
           </div>
           <div className="basket-item__counter ml-5 mr-5 flex-shrink-0 mb-3 mb-lg-0">
-            <input type="number" value={this.props.basket.count} min="1" pattern="[0-9]*"  
+            <input type="number" value={this.props.basket.count} min="1" pattern="[0-9]*" 
+              onKeyDown={this.handleKeypress}
               onChange={e => this.increaseProductCount(e.target.value, this.props.basketProductIndex)}/> Adet
           </div>
           <div className="basket-item__price mb-3 mb-lg-0">
