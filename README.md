@@ -1,5 +1,5 @@
-# REACT- REDUX SAMSUNG SHOP
-
+# REACT - REDUX - HOOKS SAMSUNG SHOP PROJECT
+Canlı test linki: https://react-redux-hooks-samsung-shop-e-commerce-project.vercel.app/
 
 ## Build Setup
 
