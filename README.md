@@ -14,7 +14,7 @@ Bu arada canlı linkten "İndirim Kodu" denemek isteyen arkadaşlar için indiri
 
 1J578J, J710JK, 9S62NF, NA5AD9, A7SMFX
 
-!Tamamen kendimi geliştirmek adına yapılmış olan bir projedir, kesinlikle hiç bir ticari amacı yoktur.
+## Tamamen kendimi geliştirmek adına yapılmış olan bir projedir, kesinlikle hiç bir ticari amacı yoktur.
 
 ## Build Setup
 
