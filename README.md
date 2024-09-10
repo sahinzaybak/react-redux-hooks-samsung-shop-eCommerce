@@ -11,8 +11,10 @@ Uygulamayı daha da geliştirmek adına fikir vermek isteyen arkadaşlar olursa 
 
 Bu arada canlı linkten "İndirim Kodu" denemek isteyen arkadaşlar için indirim kodlarını aşağıya bırakıyorum.
 
+
 1J578J, J710JK, 9S62NF, NA5AD9, A7SMFX
 
+!Tamamen kendimi geliştirmek adına yapılmış olan bir projedir, kesinlikle hiç bir ticari amacı yoktur.
 
 ## Build Setup
 
